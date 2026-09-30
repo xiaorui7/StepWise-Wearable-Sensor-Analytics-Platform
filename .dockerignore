@@ -1,0 +1,14 @@
+.git
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.ruff_cache
+node_modules
+web/dist
+data
+benchmark-results
+example_output
+tests
+miniprogram
