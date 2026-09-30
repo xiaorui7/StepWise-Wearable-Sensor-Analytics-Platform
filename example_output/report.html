@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StepWise Analysis Report</title><style>
+:root{--ink:#13242f;--navy:#123b4b;--teal:#238b78;--line:#d8e2e6;--soft:#f4f7f8}
+*{box-sizing:border-box} body{margin:0;background:var(--soft);color:var(--ink);font-family:Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:32px max(24px,calc((100% - 1040px)/2))} header h1{margin:0 0 8px;font-size:30px}
+main{max-width:1040px;margin:auto;padding:24px} section{background:#fff;border:1px solid var(--line);border-radius:8px;padding:22px;margin-bottom:18px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px} .metric{border-left:4px solid var(--teal);padding:10px 12px;background:#f9fbfb}
+.metric span{display:block;color:#60727d;font-size:13px} .metric strong{font-size:22px} .finding{border-top:1px solid var(--line);padding:16px 0} .finding:first-of-type{border-top:0}
+.finding-head{display:flex;align-items:center;justify-content:space-between;gap:12px} h2,h3{color:var(--navy)} .badge{padding:5px 10px;border-radius:999px;font-weight:700;font-size:12px;background:#e8eef1}
+.badge.high{background:#fee2e2;color:#8a1c1c} .badge.medium{background:#fff0c7;color:#755100} .badge.low{background:#dff4eb;color:#17624d}
+.limitation{color:#60727d;font-size:14px} img{width:100%;height:auto;border:1px solid var(--line)} footer{max-width:1040px;margin:auto;padding:0 24px 30px;color:#60727d}
+</style></head><body><header><h1>StepWise Analysis Report</h1><p>Generated 2026-09-30 00:34 UTC</p></header><main>
+<section><h2>Trial summary</h2><div class="metrics">
+<div class="metric"><span>Data quality</span><strong>High</strong></div>
+<div class="metric"><span>Detected stances</span><strong>8</strong></div>
+<div class="metric"><span>Sample rate</span><strong>100.00 Hz</strong></div>
+<div class="metric"><span>Duration</span><strong>9.59 s</strong></div></div></section>
+<section><h2>Screening results</h2>
+        <article class="finding">
+          <div class="finding-head"><h3>Medial loading bias; eversion not confirmed</h3><span class="badge low">Low</span></div>
+          <p><strong>What this suggests:</strong> Pressure is biased medially, but calibrated Pitch does not confirm eversion.</p>
+          <p><strong>Sensor evidence:</strong> Medial forefoot ratio: 0.231 | Lateral forefoot ratio: 0.205 | Arch/midfoot ratio: 0.197 | Medial-lateral CoP proxy: 0.012 | Calibrated Pitch delta: 0.71</p>
+          <p><strong>Recommended next step:</strong> Use this as a loading note and confirm with repeated trials or video.</p>
+          <p class="limitation">Pressure distribution alone cannot confirm eversion or pronation.</p>
+        </article>
+        <article class="finding">
+          <div class="finding-head"><h3>Rearfoot / heel-first landing tendency</h3><span class="badge medium">Medium</span></div>
+          <p><strong>What this suggests:</strong> Heel pressure appears early or the heel is lower than the forefoot at contact.</p>
+          <p><strong>Sensor evidence:</strong> Early rearfoot ratio: 0.969 | Landing angle: 0.00</p>
+          <p><strong>Recommended next step:</strong> Confirm the pattern with side-view video.</p>
+          <p class="limitation">The 0.65 ratio and 12 degree deadband are project engineering thresholds, not clinical cutoffs.</p>
+        </article></section>
+<section><h2>Pressure and stance timing</h2><img src="pressure.png" alt="Pressure traces and stance phases"></section>
+<section><h2>Foot orientation</h2><img src="orientation.png" alt="Pitch, roll, and yaw signals"></section>
+</main><footer>StepWise is a non-diagnostic engineering screening prototype and is not clinically validated.</footer></body></html>

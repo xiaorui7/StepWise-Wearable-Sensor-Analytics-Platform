@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-09-30T00:34:06.115778+00:00",
+  "methodology": "Direct pipeline call including parsing, charts, and report generation",
+  "fixture": "normal_like.synthetic.txt plus standing_neutral.synthetic.txt",
+  "synthetic_data_notice": "Software-test data only; not clinical validation data",
+  "runs": 20,
+  "warmup_runs": 1,
+  "median_ms": 323.53939989116043,
+  "p95_ms": 406.7016899702139,
+  "min_ms": 257.9793999902904,
+  "max_ms": 432.5225001666695,
+  "sequential_analyses_per_minute_from_median": 185.4488202060836,
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.12",
+    "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-30T00:34:54.840530+00:00",
+  "summary": {
+    "samples": 960,
+    "duration_s": 9.59,
+    "estimated_sample_rate_hz": 100.0,
+    "duplicate_timestamp_count": 0,
+    "detected_steps_single_foot": 8,
+    "contact_enter_threshold_n": 17.995659653333334,
+    "contact_exit_threshold_n": 9.897612809333335,
+    "mean_stance_time_s": 0.6287499999999998,
+    "mean_stride_time_s": 1.1985714285714286,
+    "data_quality": "High",
+    "warnings": []
+  },
+  "metrics": {
+    "RearRatio_mean": 0.3674013269042463,
+    "ArchRatio_mean": 0.19673991046699696,
+    "FrontRatio_mean": 0.43585876262875667,
+    "MedialRatio_mean": 0.23127041300455922,
+    "LateralRatio_mean": 0.20458834962419747,
+    "EarlyRearRatio_mean": 0.9689948670162578,
+    "EarlyFrontRatio_mean": 0.003558182719028251,
+    "PushOffRatio_late_stance_mean": 0.9140827569725156,
+    "CoP_AP_progression": 0.9360944036207106,
+    "CoP_ML_mean": 0.012006928521162778,
+    "StrideTime_s": 1.1985714285714286,
+    "LandingRoll_mean_deg": 0.0,
+    "InitialContactRoll_deg": 0.0,
+    "LandingPitch_mean_deg": 0.3120424711538462,
+    "InitialContactPitch_deg": -0.054952625,
+    "RollRange_deg": 0.0,
+    "PitchRange_deg": 1.325434,
+    "StrideCV": 0.002919534854330413,
+    "Roll_stance_mean": 0.0,
+    "Roll_stance_std": 0.0,
+    "Pitch_stance_mean": 0.7136275596868884,
+    "Pitch_stance_std": 0.40956928902820156,
+    "Yaw_stance_mean": 0.11893786888454011,
+    "Yaw_stance_std": 0.06826152168814298,
+    "LandingSoleGroundAngle_deg": 0.0,
+    "PitchDelta_stance_from_standing": 0.7136275596868884,
+    "LandingPitchDelta_from_standing": 0.3120424711538462,
+    "RollDelta_stance_from_standing": 0.0
+  },
+  "stance_intervals": [
+    {
+      "start_index": 0,
+      "end_index": 62
+    },
+    {
+      "start_index": 119,
+      "end_index": 182
+    },
+    {
+      "start_index": 239,
+      "end_index": 302
+    },
+    {
+      "start_index": 359,
+      "end_index": 422
+    },
+    {
+      "start_index": 479,
+      "end_index": 542
+    },
+    {
+      "start_index": 599,
+      "end_index": 662
+    },
+    {
+      "start_index": 719,
+      "end_index": 782
+    },
+    {
+      "start_index": 839,
+      "end_index": 902
+    }
+  ],
+  "screening_cards": [
+    {
+      "title": "Medial loading bias; eversion not confirmed",
+      "level": "Low",
+      "evidence": [
+        "Medial forefoot ratio: 0.231",
+        "Lateral forefoot ratio: 0.205",
+        "Arch/midfoot ratio: 0.197",
+        "Medial-lateral CoP proxy: 0.012",
+        "Calibrated Pitch delta: 0.71"
+      ],
+      "interpretation": "Pressure is biased medially, but calibrated Pitch does not confirm eversion.",
+      "action": "Use this as a loading note and confirm with repeated trials or video.",
+      "limitation": "Pressure distribution alone cannot confirm eversion or pronation."
+    },
+    {
+      "title": "Rearfoot / heel-first landing tendency",
+      "level": "Medium",
+      "evidence": [
+        "Early rearfoot ratio: 0.969",
+        "Landing angle: 0.00"
+      ],
+      "interpretation": "Heel pressure appears early or the heel is lower than the forefoot at contact.",
+      "action": "Confirm the pattern with side-view video.",
+      "limitation": "The 0.65 ratio and 12 degree deadband are project engineering thresholds, not clinical cutoffs."
+    }
+  ],
+  "artifacts": [
+    {
+      "name": "report.html",
+      "media_type": "text/html"
+    },
+    {
+      "name": "pressure.png",
+      "media_type": "image/png"
+    },
+    {
+      "name": "orientation.png",
+      "media_type": "image/png"
+    },
+    {
+      "name": "steps.csv",
+      "media_type": "text/csv"
+    },
+    {
+      "name": "result.json",
+      "media_type": "application/json"
+    }
+  ],
+  "disclaimer": "StepWise is a non-diagnostic engineering screening prototype and is not clinically validated."
+}
