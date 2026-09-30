@@ -79,7 +79,7 @@ Docker with Compose is required.
 ```bash
 git clone https://github.com/xiaorui7/StepWise-Wearable-Sensor-Analytics-Platform.git
 cd StepWise-Wearable-Sensor-Analytics-Platform
-docker compose up --build
+docker compose up --build -d
 ```
 
 Then open:
@@ -89,6 +89,17 @@ Then open:
 - Health endpoint: `http://localhost:8000/health`
 
 Click **Load demo data** to submit the bundled synthetic walking and standing files.
+
+Useful lifecycle commands:
+
+```bash
+docker compose ps          # inspect service health
+docker compose logs -f     # follow application logs
+docker compose down        # stop the stack without deleting persistent volumes
+```
+
+Do not add `-v` to `docker compose down` unless you intentionally want to delete the database and
+generated artifacts.
 
 ### Analysis CLI
 
@@ -140,9 +151,12 @@ The PostgreSQL-specific test requires `STEPWISE_TEST_POSTGRES_URL`. Other tests 
 databases so they can run without external services.
 
 The latest local verification completed 29 tests with 86% branch coverage; one PostgreSQL-specific
-test was skipped because PostgreSQL was unavailable on that machine. Ruff, strict mypy, frontend
-lint, and the Vite production build passed. Docker Compose is configured but was not executed on the
-same machine because Docker was not installed.
+test was skipped in that test run. Ruff, strict mypy, frontend lint, and the Vite production build
+passed. The complete five-service Docker Compose stack was subsequently built and exercised with
+PostgreSQL and Redis: health/readiness checks passed, a synthetic asynchronous analysis completed,
+all expected artifacts were retrieved, and the persisted result remained available after restarting
+the API container. See [`docs/DOCKER_VERIFICATION.md`](docs/DOCKER_VERIFICATION.md) for the exact
+commands and observed results.
 
 The checked-in sequential benchmark runs the complete pipeline, including parsing, analysis, charts,
 and report generation. Its latest 20-run result is recorded in
