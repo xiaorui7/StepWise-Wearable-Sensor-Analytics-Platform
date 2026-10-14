@@ -31,6 +31,10 @@ services:
       STEPWISE_REDIS_URL: redis://redis:6379/0
       STEPWISE_ARTIFACT_ROOT: /data/artifacts
       STEPWISE_CORS_ORIGINS: http://localhost:5173
+      STEPWISE_MAX_ATTEMPTS: ${STEPWISE_MAX_ATTEMPTS:-3}
+      STEPWISE_RETRY_DELAY_S: ${STEPWISE_RETRY_DELAY_S:-5}
+      STEPWISE_JOB_TIMEOUT_S: ${STEPWISE_JOB_TIMEOUT_S:-300}
+      STEPWISE_RECOVERY_GRACE_S: ${STEPWISE_RECOVERY_GRACE_S:-60}
     ports: ["8000:8000"]
     volumes: [artifact_data:/data/artifacts]
     depends_on:
@@ -60,6 +64,21 @@ services:
     ports: ["5173:80"]
     depends_on:
       api: {condition: service_healthy}
+
+  tests:
+    profiles: [test]
+    build:
+      context: .
+      dockerfile: backend/Dockerfile.test
+    environment:
+      STEPWISE_TEST_POSTGRES_URL: postgresql+psycopg://stepwise:stepwise@postgres:5432/stepwise
+      STEPWISE_TEST_REDIS_URL: redis://redis:6379/14
+      STEPWISE_DATABASE_URL: sqlite:////tmp/stepwise-tests.sqlite3
+      PYTHONPATH: /workspace/src
+    volumes: [".:/workspace"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
 
 volumes:
   postgres_data:

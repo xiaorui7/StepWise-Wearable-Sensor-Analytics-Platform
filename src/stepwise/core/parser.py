@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from io import StringIO
 
+import numpy as np
 import pandas as pd
 
 DEFAULT_COLUMNS = [
@@ -34,6 +35,8 @@ def parse_sensor_text(text: str) -> pd.DataFrame:
     rows: list[list[str]] = []
     for line in StringIO(text):
         parts = line.strip().split()
+        if parts and parts[0].isdigit() and len(parts) != len(DEFAULT_COLUMNS):
+            raise SensorDataError("A sensor row does not contain all 15 fields")
         if len(parts) == len(DEFAULT_COLUMNS) and parts[0].isdigit():
             rows.append(parts)
     if not rows:
@@ -45,6 +48,8 @@ def parse_sensor_text(text: str) -> pd.DataFrame:
             frame[column] = pd.to_numeric(frame[column], errors="coerce")
     if frame.drop(columns=["SystemTime"]).isna().any().any():
         raise SensorDataError("One or more sensor values are not numeric")
+    if not np.isfinite(frame.drop(columns=["SystemTime"]).to_numpy(dtype=float)).all():
+        raise SensorDataError("Sensor values must be finite")
 
     times = pd.to_datetime(frame["SystemTime"], format="%H:%M:%S.%f", errors="coerce")
     if times.isna().any():

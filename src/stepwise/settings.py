@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     max_upload_bytes: int = Field(default=5 * 1024 * 1024, ge=1024, le=25 * 1024 * 1024)
     cors_origins: str = "http://localhost:5173"
     log_level: str = "INFO"
+    max_attempts: int = Field(default=3, ge=1, le=5)
+    retry_delay_s: int = Field(default=5, ge=0, le=300)
+    job_timeout_s: int = Field(default=300, ge=10, le=3600)
+    recovery_grace_s: int = Field(default=60, ge=10, le=3600)
 
     @property
     def cors_origin_list(self) -> list[str]:

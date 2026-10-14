@@ -28,6 +28,7 @@ jobs:
       STEPWISE_DATABASE_URL: postgresql+psycopg://stepwise:stepwise@localhost:5432/stepwise_test
       STEPWISE_TEST_POSTGRES_URL: postgresql+psycopg://stepwise:stepwise@localhost:5432/stepwise_test
       STEPWISE_REDIS_URL: redis://localhost:6379/0
+      STEPWISE_TEST_REDIS_URL: redis://localhost:6379/14
       STEPWISE_ARTIFACT_ROOT: /tmp/stepwise-artifacts
     steps:
       - uses: actions/checkout@v4
@@ -39,7 +40,7 @@ jobs:
       - run: ruff check src tests scripts
       - run: mypy src/stepwise
       - run: alembic upgrade head
-      - run: pytest --cov=stepwise --cov-report=term --cov-report=xml
+      - run: pytest --cov=stepwise --cov-branch --cov-report=term --cov-report=xml
       - uses: actions/upload-artifact@v4
         with:
           name: backend-coverage

@@ -90,6 +90,9 @@ Then open:
 
 Click **Load demo data** to submit the bundled synthetic walking and standing files.
 
+For two background workers, run `docker compose up -d --scale worker=2`. Retries and recovery
+parameters can be set using the variables in `.env.example`.
+
 Useful lifecycle commands:
 
 ```bash
@@ -130,6 +133,20 @@ stepwise-analyze fixtures/synthetic/normal_like.synthetic.txt \
 
 `POST /api/v1/analyses/text` is retained for the optional WeChat client.
 
+Submission supports an optional `Idempotency-Key`. The same key and input bytes/configuration return
+the same analysis ID; reusing the key with different content returns 409. Without a key, each upload
+is a new analysis. For example (use `curl.exe` on Windows):
+
+```bash
+curl -X POST http://localhost:8000/api/v1/analyses \
+  -H 'Idempotency-Key: demo-trial-1' \
+  -F 'walking_file=@fixtures/synthetic/normal_like.synthetic.txt' \
+  -F 'standing_file=@fixtures/synthetic/standing_neutral.synthetic.txt'
+```
+
+Poll the returned ID at `/api/v1/analyses/{id}`, then retrieve `/result` and its artifact URLs.
+Interrupted executions can be reconciled with `docker compose exec api stepwise-reconcile`.
+
 ## Tests
 
 ```bash
@@ -150,18 +167,37 @@ artifact path safety, database state, queue failures, and an upload-to-report wo
 The PostgreSQL-specific test requires `STEPWISE_TEST_POSTGRES_URL`. Other tests use temporary SQLite
 databases so they can run without external services.
 
-The latest local verification completed 29 tests with 86% branch coverage; one PostgreSQL-specific
-test was skipped in that test run. Ruff, strict mypy, frontend lint, and the Vite production build
-passed. The complete five-service Docker Compose stack was subsequently built and exercised with
-PostgreSQL and Redis: health/readiness checks passed, a synthetic asynchronous analysis completed,
-all expected artifacts were retrieved, and the persisted result remained available after restarting
-the API container. See [`docs/DOCKER_VERIFICATION.md`](docs/DOCKER_VERIFICATION.md) for the exact
-commands and observed results.
+Run the complete Linux suite, including real PostgreSQL/Redis/RQ worker tests, without installing
+database servers on the host:
 
-The checked-in sequential benchmark runs the complete pipeline, including parsing, analysis, charts,
-and report generation. Its latest 20-run result is recorded in
-[`benchmark-results/latest.md`](benchmark-results/latest.md). It is a local synthetic-data benchmark,
-not a concurrency or production-load claim.
+```bash
+docker compose --profile test build tests
+docker compose --profile test run --rm tests
+```
+
+The October verification passed **72 tests with no skips**: 88.19% statement coverage, 74.61% branch
+coverage, and 85.79% combined coverage across `src/stepwise`. Ruff, strict mypy, frontend lint/build,
+Docker builds, and PostgreSQL/SQLite migrations also passed. The suite exercises concurrent
+idempotency, concurrent claims, two real workers, bounded/scheduled retries, process termination,
+artifact publication failures and recovery. Historical Docker startup evidence is in
+[`docs/DOCKER_VERIFICATION.md`](docs/DOCKER_VERIFICATION.md); current engineering evidence is in
+[`docs/RESUME_EVIDENCE.md`](docs/RESUME_EVIDENCE.md).
+
+## Benchmarks
+
+The direct sequential benchmark includes parsing, analysis, charts and report generation. The load
+benchmark additionally exercises HTTP submission, queue waiting, worker execution, persistence and
+retrieval. Use the project Python environment installed with `pip install -e ".[dev]"`:
+
+```bash
+python scripts/benchmark.py --runs 20 --output-dir benchmarks/core
+python scripts/load_benchmark.py --concurrency 1 5 10 20 --jobs 20 --workers 2 --sample-resources
+```
+
+For the second command, first start two workers using the command above. `--workers` records the
+configured count; it does not start workers. Results and workload definitions are in
+[`docs/BENCHMARK.md`](docs/BENCHMARK.md) and [`benchmarks/load-latest.md`](benchmarks/load-latest.md).
+These are small synthetic software workloads, not clinical validation or production-load claims.
 
 ## Project Structure
 
@@ -172,11 +208,13 @@ src/stepwise/pipeline.py analysis orchestration and artifact generation
 src/stepwise/jobs.py     RQ enqueueing and worker execution
 src/stepwise/repository.py database state transitions
 src/stepwise/storage.py  filesystem artifact storage
+src/stepwise/recovery.py interrupted/lost job reconciliation
 web/                     React dashboard
 miniprogram/             optional WeChat client
 tests/                   core, integration, and end-to-end tests
 fixtures/synthetic/      deterministic software-test recordings
 scripts/                 fixture generation and benchmark tooling
+benchmarks/              measured workloads and verification evidence
 ```
 
 ## Design Decisions
@@ -192,11 +230,13 @@ scripts/                 fixture generation and benchmark tooling
 
 More context is recorded in [`docs/adr/`](docs/adr/) and the engineering thresholds are documented in
 [`docs/StepWise_decision_rules_EN.md`](docs/StepWise_decision_rules_EN.md).
+The current architecture and consistency limits are described in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+and [`docs/RELIABILITY.md`](docs/RELIABILITY.md).
 
 ## Future Improvements
 
-- Add explicit RQ retry and idempotency behavior for interrupted jobs.
-- Benchmark concurrent API-to-worker workloads in addition to the sequential pipeline benchmark.
+- Add a durable enqueue outbox if automatic recovery of DB/Redis submission gaps becomes necessary.
+- Define retention and garbage collection for abandoned staging or orphaned output directories.
 - Add authentication and per-user data isolation before any multi-user deployment.
 - Implement object storage only if deployment requirements outgrow the shared filesystem volume.
 

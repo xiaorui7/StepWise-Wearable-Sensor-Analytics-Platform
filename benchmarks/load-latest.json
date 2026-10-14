@@ -1,0 +1,1176 @@
+{
+  "generated_at": "2026-10-14T01:17:40.318972+00:00",
+  "synthetic_data": true,
+  "environment": {
+    "client_os": "Windows-11-10.0.26200-SP0",
+    "client_python": "3.13.12",
+    "logical_cpus": 16,
+    "worker_count": 2,
+    "api_runtime": {
+      "python": "3.12.15",
+      "packages": {
+        "fastapi": "0.143.0",
+        "rq": "2.12.0",
+        "redis": "5.3.1",
+        "sqlalchemy": "2.1.4",
+        "numpy": "2.5.4",
+        "pandas": "2.3.3",
+        "matplotlib": "3.11.2"
+      }
+    }
+  },
+  "fixture_sha256": "4c7eb5c8535ba03868a12f22aa30e37e950839facd6435f78d2d0b36ca82c4cb",
+  "walking_bytes": 134854,
+  "standing_bytes": 70722,
+  "warmup_jobs": 1,
+  "poll_interval_s": 0.2,
+  "method": "Closed-loop clients; completion includes upload, queue wait, processing and polling delay; HTTP rate includes polling/artifact requests over entire scenario",
+  "scenarios": [
+    {
+      "concurrency": 1,
+      "jobs": 20,
+      "completed": 20,
+      "failure_rate": 0.0,
+      "duplicate_logical_jobs": 0,
+      "measurement_window_s": 20.43559590005316,
+      "http_requests": 235,
+      "http_requests_per_s": 11.499542325525663,
+      "completed_jobs_per_s": 0.9786844532362267,
+      "submission": {
+        "p50_ms": 101.81525000371039,
+        "p95_ms": 135.85680010728538
+      },
+      "completion_including_queue": {
+        "p50_ms": 981.1200000112876,
+        "p95_ms": 1046.9415501109324
+      },
+      "measurements": [
+        {
+          "index": 0,
+          "success": true,
+          "submission_ms": 76.40120014548302,
+          "analysis_id": "6c1b4a7d-9604-400c-82a6-04912cc9b04f",
+          "completion_ms": 994.9872000142932,
+          "workflow_ms": 1054.3604001868516
+        },
+        {
+          "index": 1,
+          "success": true,
+          "submission_ms": 108.65839989855886,
+          "analysis_id": "f10c7563-09b2-42dd-87e7-940b5e65f7a3",
+          "completion_ms": 1003.1411999370903,
+          "workflow_ms": 1062.825599918142
+        },
+        {
+          "index": 2,
+          "success": true,
+          "submission_ms": 115.36499997600913,
+          "analysis_id": "e1725a53-238b-4df0-b77e-9dcb0d287ef7",
+          "completion_ms": 1021.5539000928402,
+          "workflow_ms": 1122.2188000101596
+        },
+        {
+          "index": 3,
+          "success": true,
+          "submission_ms": 131.12110015936196,
+          "analysis_id": "d35f81fa-f3eb-4152-b8b0-398c3a937fef",
+          "completion_ms": 1014.6441999822855,
+          "workflow_ms": 1069.2149000242352
+        },
+        {
+          "index": 4,
+          "success": true,
+          "submission_ms": 92.23760012537241,
+          "analysis_id": "17764bfc-9190-41e7-879b-1df83baf50c8",
+          "completion_ms": 985.3858000133187,
+          "workflow_ms": 1054.2533001862466
+        },
+        {
+          "index": 5,
+          "success": true,
+          "submission_ms": 48.78630000166595,
+          "analysis_id": "042e9843-4239-48a1-b890-f36303e851b9",
+          "completion_ms": 727.8811000287533,
+          "workflow_ms": 795.2386001124978
+        },
+        {
+          "index": 6,
+          "success": true,
+          "submission_ms": 77.1728998515755,
+          "analysis_id": "294fa199-a83c-46f7-8257-de08067a075e",
+          "completion_ms": 949.4526998605579,
+          "workflow_ms": 1024.6985999401659
+        },
+        {
+          "index": 7,
+          "success": true,
+          "submission_ms": 55.914900032803416,
+          "analysis_id": "0f9f38e7-90df-406c-917d-ffeca4474d14",
+          "completion_ms": 919.606100069359,
+          "workflow_ms": 986.482199979946
+        },
+        {
+          "index": 8,
+          "success": true,
+          "submission_ms": 41.51330003514886,
+          "analysis_id": "f0a83f8a-e286-48a6-9282-e2d923d6c029",
+          "completion_ms": 709.4491999596357,
+          "workflow_ms": 786.9104999117553
+        },
+        {
+          "index": 9,
+          "success": true,
+          "submission_ms": 108.27109985984862,
+          "analysis_id": "15fefbe6-45a4-4b1c-b6a8-7a5a5bbd9e72",
+          "completion_ms": 783.6332998704165,
+          "workflow_ms": 873.6696999985725
+        },
+        {
+          "index": 10,
+          "success": true,
+          "submission_ms": 80.26670012623072,
+          "analysis_id": "d64bbbde-4328-4822-93c7-3fd5e93c08ff",
+          "completion_ms": 988.4472000412643,
+          "workflow_ms": 1100.2937001176178
+        },
+        {
+          "index": 11,
+          "success": true,
+          "submission_ms": 63.684399938210845,
+          "analysis_id": "e880d3f9-4bad-4e4b-9ae3-9ee406b34f97",
+          "completion_ms": 971.11969999969,
+          "workflow_ms": 1074.6647999621928
+        },
+        {
+          "index": 12,
+          "success": true,
+          "submission_ms": 105.39239994250238,
+          "analysis_id": "de4a88e6-005e-424d-89ee-c74bef5b2362",
+          "completion_ms": 976.8542000092566,
+          "workflow_ms": 1049.9458000995219
+        },
+        {
+          "index": 13,
+          "success": true,
+          "submission_ms": 78.7858001422137,
+          "analysis_id": "a11e338e-55ea-443f-b0c8-a4d5b3147288",
+          "completion_ms": 976.6447001602501,
+          "workflow_ms": 1054.2599000036716
+        },
+        {
+          "index": 14,
+          "success": true,
+          "submission_ms": 98.2381000649184,
+          "analysis_id": "1262baf5-725a-455f-979a-a43554340bf6",
+          "completion_ms": 1040.2067000977695,
+          "workflow_ms": 1140.175900189206
+        },
+        {
+          "index": 15,
+          "success": true,
+          "submission_ms": 117.91000002995133,
+          "analysis_id": "637b7968-42cc-49e8-97e5-378a6d10b0fa",
+          "completion_ms": 1025.9511000476778,
+          "workflow_ms": 1128.2158000394702
+        },
+        {
+          "index": 16,
+          "success": true,
+          "submission_ms": 135.77820011414587,
+          "analysis_id": "afb29643-2e5a-41bb-8d1b-ec3048bcd28d",
+          "completion_ms": 1059.5337999984622,
+          "workflow_ms": 1158.9047000743449
+        },
+        {
+          "index": 17,
+          "success": true,
+          "submission_ms": 137.35019997693598,
+          "analysis_id": "6c66a27d-1796-4ac9-8127-4f485030eca0",
+          "completion_ms": 1046.278800116852,
+          "workflow_ms": 1131.9856999907643
+        },
+        {
+          "index": 18,
+          "success": true,
+          "submission_ms": 122.97750008292496,
+          "analysis_id": "aca88e68-a5c0-4f62-b2a8-670138f71a32",
+          "completion_ms": 794.0634000115097,
+          "workflow_ms": 862.4062999151647
+        },
+        {
+          "index": 19,
+          "success": true,
+          "submission_ms": 112.27610008791089,
+          "analysis_id": "79cde2ed-8a28-4a79-adab-1039e10ca211",
+          "completion_ms": 794.351200107485,
+          "workflow_ms": 883.3310001064092
+        }
+      ]
+    },
+    {
+      "concurrency": 5,
+      "jobs": 20,
+      "completed": 20,
+      "failure_rate": 0.0,
+      "duplicate_logical_jobs": 0,
+      "measurement_window_s": 6.279968100134283,
+      "http_requests": 266,
+      "http_requests_per_s": 42.35690305406363,
+      "completed_jobs_per_s": 3.184729552937115,
+      "submission": {
+        "p50_ms": 116.99905002024025,
+        "p95_ms": 303.7787899724208
+      },
+      "completion_including_queue": {
+        "p50_ms": 1311.5762999514118,
+        "p95_ms": 1780.433890130371
+      },
+      "measurements": [
+        {
+          "index": 0,
+          "success": true,
+          "submission_ms": 308.68250015191734,
+          "analysis_id": "36da153f-4d56-4817-aeab-e6353cabf75d",
+          "completion_ms": 2066.7162002064288,
+          "workflow_ms": 2139.3858999945223
+        },
+        {
+          "index": 1,
+          "success": true,
+          "submission_ms": 303.5206999629736,
+          "analysis_id": "7f2f2b2c-924b-4325-a434-f1018f858f6d",
+          "completion_ms": 1404.3157999403775,
+          "workflow_ms": 1595.2904999721795
+        },
+        {
+          "index": 2,
+          "success": true,
+          "submission_ms": 283.30669994466007,
+          "analysis_id": "be60c549-101f-4dbf-9850-9b1af8ed2431",
+          "completion_ms": 934.5474001020193,
+          "workflow_ms": 1022.5148999597877
+        },
+        {
+          "index": 3,
+          "success": true,
+          "submission_ms": 303.2614002004266,
+          "analysis_id": "c00e9080-21a6-4615-937d-0843efc25cf9",
+          "completion_ms": 1409.6807001624256,
+          "workflow_ms": 1604.045500047505
+        },
+        {
+          "index": 4,
+          "success": true,
+          "submission_ms": 293.6302002053708,
+          "analysis_id": "c8a37f13-c65e-4a61-af85-7a4d1220758b",
+          "completion_ms": 964.1848001629114,
+          "workflow_ms": 1033.9862999971956
+        },
+        {
+          "index": 5,
+          "success": true,
+          "submission_ms": 111.47330002859235,
+          "analysis_id": "34f5b98e-ba86-4777-9f68-a6e8310f84c4",
+          "completion_ms": 1039.7414001636207,
+          "workflow_ms": 1111.8044999893755
+        },
+        {
+          "index": 6,
+          "success": true,
+          "submission_ms": 108.34480007179081,
+          "analysis_id": "eac93d3f-4346-4e1e-8079-8d7915d64754",
+          "completion_ms": 1683.168200077489,
+          "workflow_ms": 1767.7434999495745
+        },
+        {
+          "index": 7,
+          "success": true,
+          "submission_ms": 138.71490000747144,
+          "analysis_id": "b486bc8a-e804-4e77-944d-20a9cb37bcc2",
+          "completion_ms": 1023.8652999978513,
+          "workflow_ms": 1081.5167999826372
+        },
+        {
+          "index": 8,
+          "success": true,
+          "submission_ms": 130.1822999957949,
+          "analysis_id": "3dace232-d149-48d9-a9cc-89ce5f75b687",
+          "completion_ms": 1662.2089000884444,
+          "workflow_ms": 1734.8486001137644
+        },
+        {
+          "index": 9,
+          "success": true,
+          "submission_ms": 117.31010000221431,
+          "analysis_id": "43f160f4-2cfd-41ac-946f-d73626a196bb",
+          "completion_ms": 1023.3528001699597,
+          "workflow_ms": 1072.6777000818402
+        },
+        {
+          "index": 10,
+          "success": true,
+          "submission_ms": 116.68800003826618,
+          "analysis_id": "d6c81452-9f7f-42fb-8cd2-42a22cbcdf3b",
+          "completion_ms": 1665.1757000945508,
+          "workflow_ms": 1727.9064999893308
+        },
+        {
+          "index": 11,
+          "success": true,
+          "submission_ms": 101.1844000313431,
+          "analysis_id": "38559493-e013-46c1-97a9-2fb7f9680a55",
+          "completion_ms": 973.6581000033766,
+          "workflow_ms": 1028.4853999037296
+        },
+        {
+          "index": 12,
+          "success": true,
+          "submission_ms": 98.3466999605298,
+          "analysis_id": "d3fa2d1c-5491-445e-8218-795c20edbcb8",
+          "completion_ms": 1415.0143000297248,
+          "workflow_ms": 1474.4585000444204
+        },
+        {
+          "index": 13,
+          "success": true,
+          "submission_ms": 111.38799996115267,
+          "analysis_id": "a7c43220-6c80-4560-93e5-f79501c4ef8f",
+          "completion_ms": 1012.7096001524478,
+          "workflow_ms": 1074.0674000699073
+        },
+        {
+          "index": 14,
+          "success": true,
+          "submission_ms": 46.15469998680055,
+          "analysis_id": "c4d53291-a7f6-4c06-825c-b9fd5203be57",
+          "completion_ms": 1561.8431000038981,
+          "workflow_ms": 1628.1238999217749
+        },
+        {
+          "index": 15,
+          "success": true,
+          "submission_ms": 104.96849985793233,
+          "analysis_id": "d10dfd74-bd41-47be-b0ca-d99da4009333",
+          "completion_ms": 1199.205599958077,
+          "workflow_ms": 1268.9330999273807
+        },
+        {
+          "index": 16,
+          "success": true,
+          "submission_ms": 108.91049983911216,
+          "analysis_id": "7865e395-dda7-4fa0-b1d0-443119a92726",
+          "completion_ms": 1711.293499916792,
+          "workflow_ms": 1804.6180999372154
+        },
+        {
+          "index": 17,
+          "success": true,
+          "submission_ms": 149.8484001494944,
+          "analysis_id": "52cf163e-6f78-4648-97b3-5019746e44ae",
+          "completion_ms": 1765.3664001263678,
+          "workflow_ms": 1839.0196000691503
+        },
+        {
+          "index": 18,
+          "success": true,
+          "submission_ms": 144.6299001108855,
+          "analysis_id": "9c11b482-1570-411b-8b8a-e53653b9cc0e",
+          "completion_ms": 1063.9999001286924,
+          "workflow_ms": 1119.9022999498993
+        },
+        {
+          "index": 19,
+          "success": true,
+          "submission_ms": 95.8789000287652,
+          "analysis_id": "df8f6e83-1d18-493d-9be6-6f443352d804",
+          "completion_ms": 1218.836799962446,
+          "workflow_ms": 1309.9750999826938
+        }
+      ]
+    },
+    {
+      "concurrency": 10,
+      "jobs": 20,
+      "completed": 20,
+      "failure_rate": 0.0,
+      "duplicate_logical_jobs": 0,
+      "measurement_window_s": 6.911031499970704,
+      "http_requests": 370,
+      "http_requests_per_s": 53.53759420740137,
+      "completed_jobs_per_s": 2.893924011210885,
+      "submission": {
+        "p50_ms": 318.2746499078348,
+        "p95_ms": 529.6930049313232
+      },
+      "completion_including_queue": {
+        "p50_ms": 2864.253200008534,
+        "p95_ms": 3660.9377650544047
+      },
+      "measurements": [
+        {
+          "index": 0,
+          "success": true,
+          "submission_ms": 469.97380000539124,
+          "analysis_id": "82175cd8-78bc-451d-b379-626ab6afce9e",
+          "completion_ms": 1196.716699982062,
+          "workflow_ms": 1296.461399877444
+        },
+        {
+          "index": 1,
+          "success": true,
+          "submission_ms": 486.2066002096981,
+          "analysis_id": "f4c2aba8-60ad-48cf-85ce-57e8859b3a1e",
+          "completion_ms": 1847.2139001823962,
+          "workflow_ms": 1943.3683000970632
+        },
+        {
+          "index": 2,
+          "success": true,
+          "submission_ms": 509.64460009709,
+          "analysis_id": "ee85693f-711f-47f4-9039-2c91d4ed55fa",
+          "completion_ms": 2539.0435000881553,
+          "workflow_ms": 2608.457300113514
+        },
+        {
+          "index": 3,
+          "success": true,
+          "submission_ms": 541.545300045982,
+          "analysis_id": "5eb44456-d0cb-43e2-8a9e-5ead0d06cd73",
+          "completion_ms": 3660.110600059852,
+          "workflow_ms": 3721.7347000259906
+        },
+        {
+          "index": 4,
+          "success": true,
+          "submission_ms": 529.0691999252886,
+          "analysis_id": "5c83fcf7-ffb4-4939-a61c-cb8ffbfefa6b",
+          "completion_ms": 3676.6538999509066,
+          "workflow_ms": 3732.827000087127
+        },
+        {
+          "index": 5,
+          "success": true,
+          "submission_ms": 514.0728999394923,
+          "analysis_id": "0c5fd3bc-f66d-41f4-a288-f9ed885297ee",
+          "completion_ms": 2571.128600044176,
+          "workflow_ms": 2632.192099932581
+        },
+        {
+          "index": 6,
+          "success": true,
+          "submission_ms": 486.86780012212694,
+          "analysis_id": "2badac98-c038-4f0f-992d-2bd5744b3d8d",
+          "completion_ms": 1821.0835000500083,
+          "workflow_ms": 1930.7313000317663
+        },
+        {
+          "index": 7,
+          "success": true,
+          "submission_ms": 513.9389000833035,
+          "analysis_id": "21ce07d3-48f0-46a6-a3d4-30a231153f7e",
+          "completion_ms": 3228.4359000623226,
+          "workflow_ms": 3320.2464000787586
+        },
+        {
+          "index": 8,
+          "success": true,
+          "submission_ms": 473.75519992783666,
+          "analysis_id": "f470a87f-d799-43c3-bbf7-1d01415f4c4d",
+          "completion_ms": 1197.1539999358356,
+          "workflow_ms": 1290.4550000093877
+        },
+        {
+          "index": 9,
+          "success": true,
+          "submission_ms": 502.13839998468757,
+          "analysis_id": "846b402d-3a7f-4b60-ae64-0d489586c8be",
+          "completion_ms": 3241.88210000284,
+          "workflow_ms": 3325.294200098142
+        },
+        {
+          "index": 10,
+          "success": true,
+          "submission_ms": 101.65639990009367,
+          "analysis_id": "12a0adfb-2feb-414d-9bb5-3861e7a1ba3c",
+          "completion_ms": 3062.113600084558,
+          "workflow_ms": 3135.638899868354
+        },
+        {
+          "index": 11,
+          "success": true,
+          "submission_ms": 50.9899000171572,
+          "analysis_id": "2533d7ab-39a6-4325-b6e8-6a75fd719115",
+          "completion_ms": 3056.7169999703765,
+          "workflow_ms": 3130.155400140211
+        },
+        {
+          "index": 12,
+          "success": true,
+          "submission_ms": 101.22239985503256,
+          "analysis_id": "bee6ab8f-ce93-46f5-ab22-e9d8e705fde8",
+          "completion_ms": 2860.54899985902,
+          "workflow_ms": 2935.099700000137
+        },
+        {
+          "index": 13,
+          "success": true,
+          "submission_ms": 45.48810003325343,
+          "analysis_id": "7bc2f737-f272-4852-94bc-a7e97b60554d",
+          "completion_ms": 2857.1480000391603,
+          "workflow_ms": 2931.1142000369728
+        },
+        {
+          "index": 14,
+          "success": true,
+          "submission_ms": 153.85389979928732,
+          "analysis_id": "bef949f5-441e-43f2-9a6e-d3042188f02c",
+          "completion_ms": 2889.668099815026,
+          "workflow_ms": 2961.2037998158485
+        },
+        {
+          "index": 15,
+          "success": true,
+          "submission_ms": 110.17100000753999,
+          "analysis_id": "d44b21be-e3d7-4a00-9597-6fdfd29a145a",
+          "completion_ms": 2867.9574001580477,
+          "workflow_ms": 2928.820400033146
+        },
+        {
+          "index": 16,
+          "success": true,
+          "submission_ms": 103.40330004692078,
+          "analysis_id": "823aaea8-6fac-41e7-a5f3-792929f74c07",
+          "completion_ms": 2840.0249001570046,
+          "workflow_ms": 2927.715400001034
+        },
+        {
+          "index": 17,
+          "success": true,
+          "submission_ms": 79.62219999171793,
+          "analysis_id": "61c4d248-f4e2-440b-87ce-3e959a4520bf",
+          "completion_ms": 2606.9368000607938,
+          "workflow_ms": 2654.1313999332488
+        },
+        {
+          "index": 18,
+          "success": true,
+          "submission_ms": 166.57549981027842,
+          "analysis_id": "c7ad2741-42f1-432d-bb50-7b304360eb47",
+          "completion_ms": 2868.0516998283565,
+          "workflow_ms": 2923.4465998597443
+        },
+        {
+          "index": 19,
+          "success": true,
+          "submission_ms": 157.5525999069214,
+          "analysis_id": "13697e88-edbe-4a56-b4ba-9726df9f0962",
+          "completion_ms": 3085.756199900061,
+          "workflow_ms": 3173.9047998562455
+        }
+      ]
+    },
+    {
+      "concurrency": 20,
+      "jobs": 20,
+      "completed": 20,
+      "failure_rate": 0.0,
+      "duplicate_logical_jobs": 0,
+      "measurement_window_s": 7.245066700037569,
+      "http_requests": 437,
+      "http_requests_per_s": 60.3169050186569,
+      "completed_jobs_per_s": 2.7604990855220546,
+      "submission": {
+        "p50_ms": 1068.608450004831,
+        "p95_ms": 1182.8155700000934
+      },
+      "completion_including_queue": {
+        "p50_ms": 4241.154299932532,
+        "p95_ms": 7123.141755082179
+      },
+      "measurements": [
+        {
+          "index": 0,
+          "success": true,
+          "submission_ms": 1182.806900003925,
+          "analysis_id": "cb6fe3a4-4672-49ff-bb66-5a6ba105ce81",
+          "completion_ms": 6485.083099920303,
+          "workflow_ms": 6536.614099983126
+        },
+        {
+          "index": 1,
+          "success": true,
+          "submission_ms": 981.9527000654489,
+          "analysis_id": "4d006c92-5b7b-4d30-bbab-30659be976a4",
+          "completion_ms": 1741.4795001968741,
+          "workflow_ms": 1821.7168000992388
+        },
+        {
+          "index": 2,
+          "success": true,
+          "submission_ms": 1111.2103001214564,
+          "analysis_id": "7e09e1b6-68ef-4783-9e55-3006a6665920",
+          "completion_ms": 6069.039199966937,
+          "workflow_ms": 6134.919000091031
+        },
+        {
+          "index": 3,
+          "success": true,
+          "submission_ms": 1176.8225999549031,
+          "analysis_id": "4347163b-accb-4b9a-b785-1726047b6bd4",
+          "completion_ms": 6004.50689997524,
+          "workflow_ms": 6086.801499826834
+        },
+        {
+          "index": 4,
+          "success": true,
+          "submission_ms": 1028.4916998352855,
+          "analysis_id": "7d8d6832-27e9-494c-856e-41d9fa3e6dab",
+          "completion_ms": 3520.833699963987,
+          "workflow_ms": 3634.103300049901
+        },
+        {
+          "index": 5,
+          "success": true,
+          "submission_ms": 1000.478400150314,
+          "analysis_id": "32e09903-9143-435c-94f5-815f775f2659",
+          "completion_ms": 2865.4063001740724,
+          "workflow_ms": 2956.12830016762
+        },
+        {
+          "index": 6,
+          "success": true,
+          "submission_ms": 1048.9835999906063,
+          "analysis_id": "a0e2be25-c3ec-4a1e-a3f0-056b96fbb7e4",
+          "completion_ms": 3993.3123998343945,
+          "workflow_ms": 4087.8059999085963
+        },
+        {
+          "index": 7,
+          "success": true,
+          "submission_ms": 1182.9802999272943,
+          "analysis_id": "d885d171-25b2-4d5c-b870-f07ff8a1f619",
+          "completion_ms": 7139.01919987984,
+          "workflow_ms": 7239.71310001798
+        },
+        {
+          "index": 8,
+          "success": true,
+          "submission_ms": 994.6610999759287,
+          "analysis_id": "bb14e455-5f65-462b-9a74-2bc66bb653e5",
+          "completion_ms": 1716.5719999466091,
+          "workflow_ms": 1831.9814000278711
+        },
+        {
+          "index": 9,
+          "success": true,
+          "submission_ms": 1182.654800126329,
+          "analysis_id": "178b98a4-3f0e-479f-9773-2c6efe6653fd",
+          "completion_ms": 7122.306100092828,
+          "workflow_ms": 7232.934700092301
+        },
+        {
+          "index": 10,
+          "success": true,
+          "submission_ms": 1081.67660003528,
+          "analysis_id": "9e3b43be-e48e-4adf-bedb-089e36672146",
+          "completion_ms": 4697.791999904439,
+          "workflow_ms": 4764.734900090843
+        },
+        {
+          "index": 11,
+          "success": true,
+          "submission_ms": 1079.9172001425177,
+          "analysis_id": "c6b610a8-87b2-454d-bbec-4070cf67bc00",
+          "completion_ms": 4488.99620003067,
+          "workflow_ms": 4544.583200011402
+        },
+        {
+          "index": 12,
+          "success": true,
+          "submission_ms": 1176.4377998188138,
+          "analysis_id": "5b15ea2f-9673-418a-814e-3bb872852796",
+          "completion_ms": 6702.336799819022,
+          "workflow_ms": 6761.769599979743
+        },
+        {
+          "index": 13,
+          "success": true,
+          "submission_ms": 1020.3289000783116,
+          "analysis_id": "356c775b-0d03-45c0-a5eb-4c4e182b1aba",
+          "completion_ms": 3524.31849995628,
+          "workflow_ms": 3612.6995999366045
+        },
+        {
+          "index": 14,
+          "success": true,
+          "submission_ms": 1057.2996998671442,
+          "analysis_id": "cc9f0847-a4e2-4a39-b993-0b98531d3488",
+          "completion_ms": 3990.114700049162,
+          "workflow_ms": 4082.9143000300974
+        },
+        {
+          "index": 15,
+          "success": true,
+          "submission_ms": 1080.1162999123335,
+          "analysis_id": "6cfdeabc-ec7c-4e8f-9d25-7cc17440d96d",
+          "completion_ms": 5160.194699885324,
+          "workflow_ms": 5226.957099977881
+        },
+        {
+          "index": 16,
+          "success": true,
+          "submission_ms": 1095.25080001913,
+          "analysis_id": "6e298d13-38bf-4917-a5c3-62f37f794b8f",
+          "completion_ms": 5381.198700051755,
+          "workflow_ms": 5453.159000026062
+        },
+        {
+          "index": 17,
+          "success": true,
+          "submission_ms": 992.3937998246402,
+          "analysis_id": "a28b8eb9-1965-4a84-b9bb-72098cae9a3f",
+          "completion_ms": 2139.3456999212503,
+          "workflow_ms": 2213.5789999738336
+        },
+        {
+          "index": 18,
+          "success": true,
+          "submission_ms": 997.8221000637859,
+          "analysis_id": "df147d4e-ce47-4d9d-8b89-11dcc921ff7d",
+          "completion_ms": 2806.273699970916,
+          "workflow_ms": 2925.175500102341
+        },
+        {
+          "index": 19,
+          "success": true,
+          "submission_ms": 992.3791000619531,
+          "analysis_id": "184f8c79-de0a-4bdc-b1d7-1c475625b0b9",
+          "completion_ms": 2268.8303000759333,
+          "workflow_ms": 2354.7956999391317
+        }
+      ]
+    }
+  ],
+  "resource_snapshots": [
+    {
+      "at": "2026-10-14T01:17:00.165096+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "11.87%",
+          "memory": "129.4MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "3.96%",
+          "memory": "45.61MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.26%",
+          "memory": "11.86MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "55.15%",
+          "memory": "182.6MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "6.91%",
+          "memory": "118.8MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:04.038392+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "9.73%",
+          "memory": "129.4MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "6.40%",
+          "memory": "45.79MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.35%",
+          "memory": "11.33MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "41.47%",
+          "memory": "183.5MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "27.64%",
+          "memory": "119.6MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:07.080738+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "12.45%",
+          "memory": "129.6MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "5.41%",
+          "memory": "43.83MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.67%",
+          "memory": "11.41MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "14.25%",
+          "memory": "111.9MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "60.14%",
+          "memory": "119.5MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:11.126159+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "13.62%",
+          "memory": "129.8MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "8.28%",
+          "memory": "45.74MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "3.45%",
+          "memory": "11.28MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "17.85%",
+          "memory": "112.1MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "1.96%",
+          "memory": "119.6MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:15.052957+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "39.42%",
+          "memory": "130.8MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "3.18%",
+          "memory": "44.18MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.46%",
+          "memory": "11.52MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "61.02%",
+          "memory": "112.1MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "0.99%",
+          "memory": "120.6MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:18.886506+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "42.26%",
+          "memory": "137.7MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "13.60%",
+          "memory": "55.91MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.27%",
+          "memory": "12.06MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "75.69%",
+          "memory": "184.1MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "74.84%",
+          "memory": "188.9MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:22.679374+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "28.08%",
+          "memory": "138.2MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "11.82%",
+          "memory": "56.85MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.62%",
+          "memory": "12.04MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "93.21%",
+          "memory": "141.6MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "92.99%",
+          "memory": "188.4MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:25.719052+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "47.01%",
+          "memory": "145.8MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "16.04%",
+          "memory": "56.25MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "3.27%",
+          "memory": "12.09MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "94.92%",
+          "memory": "188.2MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "95.17%",
+          "memory": "194.9MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:29.507532+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "23.09%",
+          "memory": "145.6MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "13.96%",
+          "memory": "56.34MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.41%",
+          "memory": "12.16MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "94.94%",
+          "memory": "124.4MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "93.38%",
+          "memory": "188.6MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:33.396424+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "107.63%",
+          "memory": "164.4MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "14.24%",
+          "memory": "56.62MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.27%",
+          "memory": "12.6MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "93.31%",
+          "memory": "168.3MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "92.33%",
+          "memory": "189.2MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:36.434110+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "32.48%",
+          "memory": "163.9MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "17.66%",
+          "memory": "56.61MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "4.16%",
+          "memory": "12.41MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "91.39%",
+          "memory": "142.6MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "93.32%",
+          "memory": "180.9MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-14T01:17:40.318572+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "0.27%",
+          "memory": "163.6MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "0.03%",
+          "memory": "52.01MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.09%",
+          "memory": "12.47MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "13.87MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "0.00%",
+          "memory": "113.3MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "0.16%",
+          "memory": "120.5MiB / 15.34GiB"
+        }
+      ]
+    }
+  ]
+}

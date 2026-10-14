@@ -37,6 +37,7 @@ dev = [
 
 [project.scripts]
 stepwise-analyze = "stepwise.cli:main"
+stepwise-reconcile = "stepwise.recovery:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/stepwise"]
@@ -47,6 +48,7 @@ addopts = "-ra"
 markers = [
   "postgres: requires a PostgreSQL test database",
   "e2e: end-to-end analysis workflow",
+  "infrastructure: requires PostgreSQL and Redis; worker tests require Linux",
 ]
 
 [tool.ruff]

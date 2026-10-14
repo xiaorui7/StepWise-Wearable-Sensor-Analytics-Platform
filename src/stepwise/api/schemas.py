@@ -42,6 +42,7 @@ class AnalysisStatusResponse(BaseModel):
     input_metadata: dict[str, Any]
     error_code: str | None
     error_message: str | None
+    attempts: int = 0
 
 
 class AnalysisResultResponse(BaseModel):

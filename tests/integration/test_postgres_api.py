@@ -4,11 +4,10 @@ from uuid import UUID
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import create_engine
 from sqlalchemy.orm import Session, sessionmaker
 
 from stepwise.api.main import create_app
-from stepwise.db import Base, get_db
+from stepwise.db import get_db
 from stepwise.jobs import execute_analysis_job
 from stepwise.settings import Settings
 from stepwise.storage import ArtifactStore
@@ -27,13 +26,11 @@ class ImmediateQueue:
 
 @pytest.mark.postgres
 @pytest.mark.skipif(not POSTGRES_URL, reason="STEPWISE_TEST_POSTGRES_URL is not configured")
-def test_api_worker_and_postgres(tmp_path: Path) -> None:
+def test_api_worker_and_postgres(tmp_path: Path, postgres_env) -> None:
     assert POSTGRES_URL is not None
-    engine = create_engine(POSTGRES_URL)
-    Base.metadata.create_all(engine)
-    sessions = sessionmaker(bind=engine, expire_on_commit=False)
+    sessions, scoped_url, _ = postgres_env
     store = ArtifactStore(tmp_path / "postgres-artifacts")
-    settings = Settings(database_url=POSTGRES_URL, artifact_root=tmp_path / "postgres-artifacts")
+    settings = Settings(database_url=scoped_url, artifact_root=tmp_path / "postgres-artifacts")
     app = create_app(settings=settings, queue=ImmediateQueue(sessions, store))
 
     def override_db():

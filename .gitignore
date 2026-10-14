@@ -8,6 +8,8 @@ __pycache__/
 .coverage
 coverage.xml
 coverage*.json
+benchmarks/coverage.json
+benchmarks/tests.xml
 htmlcov/
 dist/
 build/

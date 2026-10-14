@@ -7,7 +7,7 @@ from stepwise.jobs import RQJobQueue
 
 def test_rq_adapter_enqueues_analysis_job(monkeypatch) -> None:
     fake_redis = fakeredis.FakeRedis()
-    monkeypatch.setattr("stepwise.jobs.redis.Redis.from_url", lambda _: fake_redis)
+    monkeypatch.setattr("stepwise.jobs.redis.Redis.from_url", lambda *args, **kwargs: fake_redis)
     queue = RQJobQueue("redis://unused/0")
     analysis_id = uuid4()
     queue.enqueue_analysis(analysis_id)

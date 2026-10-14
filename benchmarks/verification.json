@@ -1,0 +1,28 @@
+{
+  "verification_date_local": "2026-10-13",
+  "environment": "Docker Linux test runner, Python 3.12.15, PostgreSQL 16, Redis 7",
+  "command": "docker compose --profile test run --rm tests pytest --cov=stepwise --cov-branch --cov-report=term --cov-report=json:benchmarks/coverage.json --junitxml=benchmarks/tests.xml",
+  "tests_passed": 72,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "test_duration_s": 41.94,
+  "coverage": {
+    "scope": "src/stepwise",
+    "covered_statements": 1053,
+    "total_statements": 1194,
+    "statement_percent": 88.19095477386935,
+    "covered_branches": 191,
+    "total_branches": 256,
+    "branch_percent": 74.609375,
+    "combined_percent": 85.79310344827586,
+    "core_covered_statements": 354,
+    "core_total_statements": 379,
+    "core_covered_branches": 102,
+    "core_total_branches": 128
+  },
+  "limitations": [
+    "Coverage counts are not a reliability or clinical accuracy measurement.",
+    "RQ child-process integration tests pass, but not all child-process lines are included in parent-process coverage.",
+    "The run emitted one Starlette TestClient deprecation warning and six RQ fork-from-multithreaded-test-process warnings."
+  ]
+}

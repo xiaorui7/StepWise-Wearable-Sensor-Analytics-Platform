@@ -171,10 +171,15 @@ measure clinical accuracy.
 ## What Is Intentionally Missing
 
 - Authentication and multi-user isolation
-- Automatic RQ retries and idempotency guarantees
+- A durable enqueue outbox and automatic orphan-file garbage collection
 - S3-compatible object storage
-- Concurrent load-test results
+- Cross-host deployment and high-availability verification
 - Medical diagnostic or accuracy claims
 
 These are honest boundaries, not hidden completed features. In an interview, explain what requirement
 would justify adding each one instead of saying the project is production-ready.
+
+The October backend upgrade added database-constrained submission idempotency, bounded RQ retries,
+execution-token fencing, atomic report publication and operator-run recovery. See
+`docs/RELIABILITY.md`, `docs/BENCHMARK.md`, and `docs/RESUME_EVIDENCE.md` for current implementation
+and measured evidence.

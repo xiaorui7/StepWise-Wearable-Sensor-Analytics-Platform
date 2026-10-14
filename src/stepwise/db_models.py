@@ -4,7 +4,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import Any
 
-from sqlalchemy import JSON, DateTime, ForeignKey, String, Text, Uuid
+from sqlalchemy import JSON, DateTime, ForeignKey, Integer, String, Text, UniqueConstraint, Uuid
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -26,6 +26,11 @@ class AnalysisRecord(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utc_now)
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")
+    execution_token: Mapped[str | None] = mapped_column(String(36))
+    lease_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    idempotency_key: Mapped[str | None] = mapped_column(String(64), unique=True)
+    request_fingerprint: Mapped[str | None] = mapped_column(String(64))
     sensor_config: Mapped[dict[str, Any]] = mapped_column(JSON_TYPE)
     input_metadata: Mapped[dict[str, Any]] = mapped_column(JSON_TYPE)
     summary: Mapped[dict[str, Any] | None] = mapped_column(JSON_TYPE)
@@ -39,6 +44,7 @@ class AnalysisRecord(Base):
 
 class ArtifactRecord(Base):
     __tablename__ = "artifacts"
+    __table_args__ = (UniqueConstraint("analysis_id", "name", name="uq_artifact_analysis_name"),)
 
     id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
     analysis_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("analyses.id", ondelete="CASCADE"), index=True)
