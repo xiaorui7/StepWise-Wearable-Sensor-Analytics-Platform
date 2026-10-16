@@ -13,7 +13,7 @@ import redis
 import structlog
 from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import JSONResponse, Response
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
@@ -34,7 +34,7 @@ from stepwise.jobs import JobQueue, RQJobQueue
 from stepwise.logging import configure_logging
 from stepwise.repository import AnalysisRepository, IdempotencyConflict
 from stepwise.settings import Settings, get_settings
-from stepwise.storage import ArtifactStore
+from stepwise.storage import ArtifactNotFoundError, StorageBackend, create_store
 
 logger = structlog.get_logger()
 
@@ -73,7 +73,7 @@ async def _read_upload(upload: UploadFile, maximum_bytes: int) -> bytes:
 def _create_analysis_job(
     *,
     session: Session,
-    store: ArtifactStore,
+    store: StorageBackend,
     queue: JobQueue,
     config: AnalysisConfig,
     walking_data: bytes,
@@ -140,7 +140,7 @@ def create_app(*, settings: Settings | None = None, queue: JobQueue | None = Non
     )
     app.state.settings = app_settings
     app.state.queue = queue
-    app.state.store = ArtifactStore(app_settings.artifact_root)
+    app.state.store = create_store(app_settings)
     app.add_middleware(BodyLimitMiddleware, maximum_bytes=2 * app_settings.max_upload_bytes + 262144)
     app.add_middleware(
         CORSMiddleware,
@@ -203,6 +203,7 @@ def create_app(*, settings: Settings | None = None, queue: JobQueue | None = Non
         try:
             session.execute(text("SELECT 1"))
             redis.Redis.from_url(app_settings.redis_url, socket_connect_timeout=2, socket_timeout=2).ping()
+            app.state.store.check()
         except Exception as exc:
             raise HTTPException(status_code=503, detail="A required dependency is unavailable") from exc
         return {"status": "ready"}
@@ -329,17 +330,20 @@ def create_app(*, settings: Settings | None = None, queue: JobQueue | None = Non
     @app.get("/api/v1/analyses/{analysis_id}/artifacts/{artifact_name}")
     def get_artifact(
         analysis_id: UUID, artifact_name: str, session: Session = Depends(get_db)
-    ) -> FileResponse:
+    ) -> Response:
         artifact = AnalysisRepository(session).find_artifact(analysis_id, artifact_name)
         record = AnalysisRepository(session).get(analysis_id)
         if record is not None and record.status != JobStatus.SUCCEEDED.value:
             raise HTTPException(status_code=409, detail="Artifacts are unavailable until analysis succeeds")
         if artifact is None or artifact.artifact_type != "generated":
             raise HTTPException(status_code=404, detail="Artifact not found")
-        path = app.state.store.resolve(artifact.storage_key)
-        if not path.is_file():
-            raise HTTPException(status_code=404, detail="Artifact content not found")
-        return FileResponse(path, media_type=artifact.media_type)
+        try:
+            content = app.state.store.read(artifact.storage_key)
+        except ArtifactNotFoundError:
+            raise HTTPException(status_code=404, detail="Artifact content not found") from None
+        except OSError:
+            raise HTTPException(status_code=503, detail="Artifact storage is unavailable") from None
+        return Response(content, media_type=artifact.media_type)
 
     return app
 

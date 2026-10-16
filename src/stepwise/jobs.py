@@ -18,7 +18,7 @@ from stepwise.db import SessionLocal
 from stepwise.pipeline import run_analysis
 from stepwise.repository import AnalysisRepository, LostExecutionClaim
 from stepwise.settings import Settings, get_settings
-from stepwise.storage import ArtifactStore
+from stepwise.storage import StorageBackend, create_store
 
 logger = structlog.get_logger()
 
@@ -85,7 +85,7 @@ class RQJobQueue:
 def execute_analysis_job(
     analysis_id: str,
     session_factory: Callable[[], Session],
-    store: ArtifactStore,
+    store: StorageBackend,
     settings: Settings | None = None,
 ) -> None:
     settings = settings or get_settings()
@@ -188,7 +188,7 @@ def execute_analysis_job(
 def process_analysis_job(analysis_id: str) -> None:
     settings = get_settings()
     try:
-        execute_analysis_job(analysis_id, SessionLocal, ArtifactStore(settings.artifact_root), settings)
+        execute_analysis_job(analysis_id, SessionLocal, create_store(settings), settings)
     except PermanentAnalysisError:
         # RQ retries every raised exception unless its remaining retry budget is cleared.
         from rq import get_current_job

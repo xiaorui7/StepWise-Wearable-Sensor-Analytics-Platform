@@ -7,7 +7,7 @@ COPY pyproject.toml README.md ./
 COPY src ./src
 COPY alembic ./alembic
 COPY alembic.ini ./
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir '.[s3]'
 
 RUN addgroup --system stepwise && adduser --system --ingroup stepwise stepwise \
     && mkdir -p /data/artifacts && chown -R stepwise:stepwise /data
