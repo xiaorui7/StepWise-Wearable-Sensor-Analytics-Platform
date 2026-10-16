@@ -36,8 +36,8 @@ def run_worker(queue_name, connection, engine, barrier=None):
     )
 
 
-@pytest.fixture
-def environment(postgres_env, redis_env, tmp_path, monkeypatch):
+@pytest.fixture(params=["local", "s3"])
+def environment(postgres_env, redis_env, tmp_path, monkeypatch, request):
     if os.name != "posix":
         pytest.skip("Forking RQ worker test requires Linux; run the Docker test profile")
     sessions, url, engine = postgres_env
@@ -45,6 +45,10 @@ def environment(postgres_env, redis_env, tmp_path, monkeypatch):
     queue = RQJobQueue(settings=Settings(redis_url=os.environ["STEPWISE_TEST_REDIS_URL"], retry_delay_s=0))
     queue.queue = Queue(queue_name, connection=redis_env)
     settings = Settings(database_url=url, artifact_root=tmp_path / "artifacts", retry_delay_s=0)
+    if request.param == "s3":
+        settings = request.getfixturevalue("s3_settings").model_copy(update={
+            "database_url": url, "retry_delay_s": 0,
+        })
     monkeypatch.setattr("stepwise.jobs.SessionLocal", sessions)
     monkeypatch.setattr("stepwise.jobs.get_settings", lambda: settings)
     app = create_app(settings=settings, queue=queue)

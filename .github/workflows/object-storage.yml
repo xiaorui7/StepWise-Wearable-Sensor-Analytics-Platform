@@ -1,0 +1,19 @@
+name: Object storage integration
+on:
+  push:
+    paths: ['src/**', 'tests/**', 'deploy/**', 'compose.minio.yml', 'pyproject.toml', '.github/workflows/object-storage.yml']
+  pull_request:
+    paths: ['src/**', 'tests/**', 'deploy/**', 'compose.minio.yml', 'pyproject.toml', '.github/workflows/object-storage.yml']
+  workflow_dispatch:
+jobs:
+  minio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -p stepwise-s3 -f docker-compose.yml -f compose.minio.yml --profile s3 --profile test build minio minio-init tests
+      - run: docker compose -p stepwise-s3 -f docker-compose.yml -f compose.minio.yml --profile s3 --profile test run --rm tests
+      - if: always()
+        run: docker compose -p stepwise-s3 -f docker-compose.yml -f compose.minio.yml --profile s3 logs --tail=50
+      - if: always()
+        run: docker compose -p stepwise-s3 -f docker-compose.yml -f compose.minio.yml --profile s3 down
