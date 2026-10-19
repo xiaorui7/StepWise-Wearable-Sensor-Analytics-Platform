@@ -1,5 +1,11 @@
 # Resume evidence and interview preparation
 
+**Infrastructure extension:** The October 16-19 object-storage/kind work is recorded separately in
+[CLOUD_EVIDENCE.md](CLOUD_EVIDENCE.md), with commands in [CLOUD_INFRASTRUCTURE.md](CLOUD_INFRASTRUCTURE.md).
+The counts and performance below describe the earlier October 13 baseline; do not mix them with the
+new deployment measurements. The extension adds tested MinIO storage and a local two-API/two-worker
+kind demo, not paid cloud deployment, multi-node availability, or exactly-once processing.
+
 This file describes implemented software behavior and executed measurements. StepWise remains a
 non-diagnostic four-pressure-channel/IMU prototype. Clinical rules and thresholds were not upgraded
 into medical claims.
