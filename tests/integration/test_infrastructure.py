@@ -261,6 +261,37 @@ def test_workhorse_abrupt_exit_is_persisted_as_failed(environment, monkeypatch):
     assert Job.fetch(identity, connection=queue.queue.connection).get_status().value == "failed"
 
 
+def test_workhorse_exit_during_publication_never_exposes_outputs(environment, monkeypatch):
+    from stepwise.s3_storage import S3ArtifactStore
+    from stepwise.storage import ArtifactStore
+
+    client, sessions, queue, engine, settings = environment
+    identity = upload(client).json()["analysis_id"]
+    if settings.storage_backend == "s3":
+        original = S3ArtifactStore._put
+
+        def partial(self, *args):
+            original(self, *args)
+            os._exit(17)
+
+        monkeypatch.setattr(S3ArtifactStore, "_put", partial)
+    else:
+        original = ArtifactStore.publish
+
+        def published(self, *args):
+            original(self, *args)
+            os._exit(17)
+
+        monkeypatch.setattr(ArtifactStore, "publish", published)
+    run_worker(queue.queue.name, queue.queue.connection, engine)
+    with sessions() as session:
+        record = session.get(AnalysisRecord, UUID(identity))
+        assert record.status == "FAILED" and record.error_code == "EXECUTION_INTERRUPTED"
+        assert record.result is None
+        assert not any(a.artifact_type == "generated" for a in record.artifacts)
+    assert client.get(f"/api/v1/analyses/{identity}/artifacts/report.html").status_code == 409
+
+
 def test_missing_redis_job_is_reconciled(environment):
     client, sessions, queue, _, _ = environment
     identity = upload(client).json()["analysis_id"]

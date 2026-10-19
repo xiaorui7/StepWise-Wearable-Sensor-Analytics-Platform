@@ -1,0 +1,21 @@
+# Run this single migration/provisioning job before application deployments.
+apiVersion: batch/v1
+kind: Job
+metadata: {name: stepwise-bootstrap, namespace: stepwise}
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 180
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: bootstrap
+          image: stepwise:kind
+          imagePullPolicy: Never
+          command: [sh, -ec, "alembic upgrade head && python -m stepwise.init_bucket"]
+          envFrom:
+            - configMapRef: {name: stepwise-config}
+            - secretRef: {name: stepwise-demo-secrets}
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: "1", memory: 512Mi}

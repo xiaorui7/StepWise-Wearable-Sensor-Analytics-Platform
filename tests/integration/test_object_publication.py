@@ -133,3 +133,14 @@ def test_database_failure_after_objects_keeps_report_hidden(object_job, monkeypa
         assert record.status == "FAILED"
         assert not any(a.artifact_type == "generated" for a in record.artifacts)
     assert client.get(f"/api/v1/analyses/{identity}/artifacts/report.html").status_code == 409
+
+
+def test_corrupted_completed_content_is_not_served(object_job):
+    client, sessions, store, identity = object_job
+    execute_analysis_job(str(identity), sessions, store)
+    with sessions() as session:
+        artifact = AnalysisRepository(session).find_artifact(identity, "report.html")
+        key = store._parse(artifact.storage_key)
+    store.client.put_object(Bucket=store.bucket, Key=key, Body=b"tampered", Metadata={"sha256": "wrong"})
+    response = client.get(f"/api/v1/analyses/{identity}/artifacts/report.html")
+    assert response.status_code == 503 and "tampered" not in response.text

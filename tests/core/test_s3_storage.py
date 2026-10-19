@@ -41,6 +41,7 @@ def test_read_checks_digest(store):
 
 @pytest.mark.parametrize("status,code,error,retry", [
     (503, "SlowDown", ObjectStoreUnavailable, True),
+    (409, "ConditionalRequestConflict", ObjectStoreUnavailable, True),
     (403, "AccessDenied", OSError, False),
     (404, "NoSuchKey", ArtifactNotFoundError, False),
 ])

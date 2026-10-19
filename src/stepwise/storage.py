@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Protocol
 from uuid import UUID
 
+from stepwise.settings import Settings
+
 
 class ArtifactNotFoundError(FileNotFoundError):
     pass
@@ -98,10 +100,7 @@ class ArtifactStore:
             raise OSError("Artifact directory is unavailable")
 
 
-def create_store(settings: object) -> StorageBackend:
-    from stepwise.settings import Settings
-
-    assert isinstance(settings, Settings)
+def create_store(settings: Settings) -> StorageBackend:
     if settings.storage_backend == "s3":
         from stepwise.s3_storage import S3ArtifactStore
 

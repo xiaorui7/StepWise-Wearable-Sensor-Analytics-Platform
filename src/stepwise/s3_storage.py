@@ -9,7 +9,7 @@ from uuid import UUID
 
 import boto3
 from botocore.config import Config
-from botocore.exceptions import BotoCoreError, ClientError, HTTPClientError
+from botocore.exceptions import BotoCoreError, ClientError, HTTPClientError, IncompleteReadError
 from botocore.exceptions import ConnectionError as BotoConnectionError
 
 from stepwise.settings import Settings
@@ -53,7 +53,9 @@ class S3ArtifactStore:
                 raise ArtifactNotFoundError("Object content not found") from None
             if status in {408, 429, 500, 502, 503, 504} or code in {"SlowDown", "RequestTimeout"}:
                 raise ObjectStoreUnavailable() from None
-            if status in {409, 412}:
+            if status == 409:
+                raise ObjectStoreUnavailable() from None
+            if status == 412:
                 raise FileExistsError("Immutable object already exists") from None
             raise OSError("Object storage request rejected") from None
         except (BotoConnectionError, HTTPClientError) as exc:
@@ -121,7 +123,7 @@ class S3ArtifactStore:
         try:
             try:
                 content: bytes = body.read()
-            except (BotoConnectionError, HTTPClientError) as exc:
+            except (BotoConnectionError, HTTPClientError, IncompleteReadError) as exc:
                 raise ObjectStoreUnavailable() from exc
         finally:
             body.close()
