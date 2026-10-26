@@ -4,8 +4,8 @@
 
 Baseline `1f8499c` already supplied a modular domain package, eight HTTP operations, PostgreSQL,
 Redis/RQ, React, Docker and tests. Its queue handler swallowed exceptions, unconditionally claimed
-jobs, committed each output separately, and had no retry/key/recovery policy. The supplied resume
-metrics were audited rather than assumed. See `ENGINEERING_AUDIT.md` for the initial findings.
+jobs, committed each output separately, and had no retry/key/recovery policy. Baseline behavior and
+measurements were audited. See `ENGINEERING_AUDIT.md` for the initial findings.
 
 The same architecture now includes:
 
@@ -62,5 +62,5 @@ authentication, user isolation, or high-availability test. Recovery is operator-
 synthetic data demonstrates software behavior only. No real sensor data was requested or added.
 
 Review `RELIABILITY.md` for consistency windows, `ARCHITECTURE.md` for control/data flow, and
-`RESUME_EVIDENCE.md` for supported resume wording and eight code-grounded interview answers.
+`BENCHMARK.md` for measurement methodology and results.
 The existing WeChat client was preserved but not tested on a physical phone during this upgrade.

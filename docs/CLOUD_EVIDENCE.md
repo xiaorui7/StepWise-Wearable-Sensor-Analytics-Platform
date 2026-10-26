@@ -119,5 +119,5 @@ of conservative failure handling, not automatic recovery or an availability perc
 - The new GitHub Actions workflow is configured; local equivalent commands passed. Hosted CI status
   must be checked separately after pushing. No frontend behavior was changed or new medical claims added.
 
-Use these observations as infrastructure interview evidence. Do not replace earlier benchmark
+These observations document the local infrastructure verification. Do not replace earlier benchmark
 numbers with these without retaining workload definitions, and do not claim an improvement percentage.

@@ -24,8 +24,7 @@ fakeredis. Neither proves real concurrent RQ worker execution.
 Historical September Docker evidence records a successful synthetic job and API restart. Baseline
 CI runs Ruff, mypy, migrations, tests with PostgreSQL/Redis services, and frontend/backend image
 builds. The checked-in benchmark measured direct sequential pipeline calls, including charts and
-reports: 20 runs, 323.54 ms median and 406.70 ms p95. It excludes HTTP and queue waiting. The supplied
-resume figures (30 passing tests, 83%, 558 ms) are not supported by this checkout's fresh baseline.
+reports: 20 runs, 323.54 ms median and 406.70 ms p95. It excludes HTTP and queue waiting.
 
 ## Gaps and implementation plan
 
@@ -48,5 +47,5 @@ clinical rules are introduced.
 ## Upgrade results
 
 Final changes and fresh measurements are recorded in `RELIABILITY.md`, `BENCHMARK.md`, and
-`RESUME_EVIDENCE.md`. Baseline numbers above remain historical, rather than being silently replaced
+`IMPLEMENTATION_REPORT.md`. Baseline numbers above remain historical, rather than being silently replaced
 with a claimed performance improvement.

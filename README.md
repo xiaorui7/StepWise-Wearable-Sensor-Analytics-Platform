@@ -202,7 +202,7 @@ Docker builds, and PostgreSQL/SQLite migrations also passed. The suite exercises
 idempotency, concurrent claims, two real workers, bounded/scheduled retries, process termination,
 artifact publication failures and recovery. Historical Docker startup evidence is in
 [`docs/DOCKER_VERIFICATION.md`](docs/DOCKER_VERIFICATION.md); current engineering evidence is in
-[`docs/RESUME_EVIDENCE.md`](docs/RESUME_EVIDENCE.md).
+[`docs/IMPLEMENTATION_REPORT.md`](docs/IMPLEMENTATION_REPORT.md).
 
 The later object-storage extension passed **106 tests with no skips**, including both storage
 backends and publication-time interruption. Its separate coverage, kind results and failure
