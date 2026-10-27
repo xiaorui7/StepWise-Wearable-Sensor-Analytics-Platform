@@ -36,7 +36,7 @@ flowchart LR
     API --> QUEUE[(Redis / RQ)]
     QUEUE --> WORKER[RQ worker]
     WORKER --> PIPELINE[Analysis pipeline]
-    PIPELINE --> STORE[(Artifact volume)]
+    PIPELINE --> STORE[(Local volume or optional S3-compatible store)]
     WORKER --> DB
     API --> STORE
 ```
@@ -104,6 +104,27 @@ docker compose down        # stop the stack without deleting persistent volumes
 Do not add `-v` to `docker compose down` unless you intentionally want to delete the database and
 generated artifacts.
 
+### Optional infrastructure demo
+
+The default stack uses local files. For a private MinIO demo without shared application artifact volumes:
+
+```bash
+docker compose -p stepwise-s3 -f docker-compose.yml -f compose.minio.yml --profile s3 up --build -d --scale worker=2
+```
+
+Stop the default stack first if its ports are occupied. A separate kind demo runs two API replicas
+and two workers with PostgreSQL, Redis and MinIO:
+
+```bash
+pip install -e ".[dev,s3]"
+python scripts/kind_demo.py up
+python scripts/kind_demo.py verify
+```
+
+See [setup and storage guarantees](docs/CLOUD_INFRASTRUCTURE.md) and
+[executed infrastructure evidence](docs/CLOUD_EVIDENCE.md). This is a single-node local Kubernetes
+demo, not a public cloud deployment or a high-availability claim.
+
 ### Analysis CLI
 
 The pipeline can also run without PostgreSQL or Redis:
@@ -129,7 +150,7 @@ stepwise-analyze fixtures/synthetic/normal_like.synthetic.txt \
 | `GET` | `/api/v1/analyses` | List recent analyses |
 | `GET` | `/api/v1/analyses/{id}/artifacts/{name}` | Retrieve a generated artifact |
 | `GET` | `/health` | Process liveness |
-| `GET` | `/ready` | Database and Redis readiness |
+| `GET` | `/ready` | Database, Redis and artifact backend readiness |
 
 `POST /api/v1/analyses/text` is retained for the optional WeChat client.
 
@@ -175,13 +196,17 @@ docker compose --profile test build tests
 docker compose --profile test run --rm tests
 ```
 
-The October verification passed **72 tests with no skips**: 88.19% statement coverage, 74.61% branch
+The October 13 baseline verification passed **72 tests with no skips**: 88.19% statement coverage, 74.61% branch
 coverage, and 85.79% combined coverage across `src/stepwise`. Ruff, strict mypy, frontend lint/build,
 Docker builds, and PostgreSQL/SQLite migrations also passed. The suite exercises concurrent
 idempotency, concurrent claims, two real workers, bounded/scheduled retries, process termination,
 artifact publication failures and recovery. Historical Docker startup evidence is in
 [`docs/DOCKER_VERIFICATION.md`](docs/DOCKER_VERIFICATION.md); current engineering evidence is in
-[`docs/RESUME_EVIDENCE.md`](docs/RESUME_EVIDENCE.md).
+[`docs/IMPLEMENTATION_REPORT.md`](docs/IMPLEMENTATION_REPORT.md).
+
+The later object-storage extension passed **106 tests with no skips**, including both storage
+backends and publication-time interruption. Its separate coverage, kind results and failure
+experiments are recorded in [`docs/CLOUD_EVIDENCE.md`](docs/CLOUD_EVIDENCE.md).
 
 ## Benchmarks
 
@@ -207,7 +232,8 @@ src/stepwise/api/        FastAPI routes and request/response schemas
 src/stepwise/pipeline.py analysis orchestration and artifact generation
 src/stepwise/jobs.py     RQ enqueueing and worker execution
 src/stepwise/repository.py database state transitions
-src/stepwise/storage.py  filesystem artifact storage
+src/stepwise/storage.py  storage contract and local filesystem implementation
+src/stepwise/s3_storage.py optional immutable object storage
 src/stepwise/recovery.py interrupted/lost job reconciliation
 web/                     React dashboard
 miniprogram/             optional WeChat client
@@ -238,7 +264,7 @@ and [`docs/RELIABILITY.md`](docs/RELIABILITY.md).
 - Add a durable enqueue outbox if automatic recovery of DB/Redis submission gaps becomes necessary.
 - Define retention and garbage collection for abandoned staging or orphaned output directories.
 - Add authentication and per-user data isolation before any multi-user deployment.
-- Implement object storage only if deployment requirements outgrow the shared filesystem volume.
+- Add retention-aware cleanup for optional object storage; MinIO and kind remain development demos.
 
 ## License
 

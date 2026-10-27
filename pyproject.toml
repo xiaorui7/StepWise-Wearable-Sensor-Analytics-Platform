@@ -25,7 +25,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+s3 = ["boto3>=1.36,<2"]
 dev = [
+  "boto3>=1.36,<2",
   "fakeredis>=2.26,<3",
   "httpx>=0.28,<1",
   "mypy>=1.14,<2",

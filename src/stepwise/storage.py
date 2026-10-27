@@ -4,11 +4,26 @@ import os
 import shutil
 import tempfile
 from pathlib import Path
+from typing import Protocol
 from uuid import UUID
+
+from stepwise.settings import Settings
 
 
 class ArtifactNotFoundError(FileNotFoundError):
     pass
+
+
+class StorageBackend(Protocol):
+    def put(self, analysis_id: UUID, name: str, content: bytes) -> str: ...
+
+    def publish(
+        self, analysis_id: UUID, token: str, artifacts: dict[str, tuple[str, bytes]]
+    ) -> dict[str, tuple[str, str]]: ...
+
+    def read(self, storage_key: str) -> bytes: ...
+
+    def check(self) -> None: ...
 
 
 class ArtifactStore:
@@ -67,6 +82,8 @@ class ArtifactStore:
                 shutil.rmtree(staging)
 
     def resolve(self, storage_key: str) -> Path:
+        if "://" in storage_key:
+            raise ValueError("Storage key belongs to a different backend")
         target = (self.root / storage_key).resolve()
         if self.root != target and self.root not in target.parents:
             raise ValueError("Artifact path escapes storage root")
@@ -77,3 +94,15 @@ class ArtifactStore:
         if not target.is_file():
             raise ArtifactNotFoundError(storage_key)
         return target.read_bytes()
+
+    def check(self) -> None:
+        if not self.root.is_dir():
+            raise OSError("Artifact directory is unavailable")
+
+
+def create_store(settings: Settings) -> StorageBackend:
+    if settings.storage_backend == "s3":
+        from stepwise.s3_storage import S3ArtifactStore
+
+        return S3ArtifactStore(settings)
+    return ArtifactStore(settings.artifact_root)

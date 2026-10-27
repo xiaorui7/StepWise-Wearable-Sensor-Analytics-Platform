@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
-from pydantic import Field
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -13,6 +14,13 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./stepwise.sqlite3"
     redis_url: str = "redis://localhost:6379/0"
     artifact_root: Path = Path("data/artifacts")
+    storage_backend: Literal["local", "s3"] = "local"
+    s3_endpoint_url: str | None = None
+    s3_bucket: str = "stepwise"
+    s3_prefix: str = "artifacts"
+    s3_region: str = "us-east-1"
+    s3_access_key: SecretStr = SecretStr("")
+    s3_secret_key: SecretStr = SecretStr("")
     max_upload_bytes: int = Field(default=5 * 1024 * 1024, ge=1024, le=25 * 1024 * 1024)
     cors_origins: str = "http://localhost:5173"
     log_level: str = "INFO"

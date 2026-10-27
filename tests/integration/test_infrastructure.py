@@ -36,8 +36,8 @@ def run_worker(queue_name, connection, engine, barrier=None):
     )
 
 
-@pytest.fixture
-def environment(postgres_env, redis_env, tmp_path, monkeypatch):
+@pytest.fixture(params=["local", "s3"])
+def environment(postgres_env, redis_env, tmp_path, monkeypatch, request):
     if os.name != "posix":
         pytest.skip("Forking RQ worker test requires Linux; run the Docker test profile")
     sessions, url, engine = postgres_env
@@ -45,6 +45,10 @@ def environment(postgres_env, redis_env, tmp_path, monkeypatch):
     queue = RQJobQueue(settings=Settings(redis_url=os.environ["STEPWISE_TEST_REDIS_URL"], retry_delay_s=0))
     queue.queue = Queue(queue_name, connection=redis_env)
     settings = Settings(database_url=url, artifact_root=tmp_path / "artifacts", retry_delay_s=0)
+    if request.param == "s3":
+        settings = request.getfixturevalue("s3_settings").model_copy(update={
+            "database_url": url, "retry_delay_s": 0,
+        })
     monkeypatch.setattr("stepwise.jobs.SessionLocal", sessions)
     monkeypatch.setattr("stepwise.jobs.get_settings", lambda: settings)
     app = create_app(settings=settings, queue=queue)
@@ -255,6 +259,37 @@ def test_workhorse_abrupt_exit_is_persisted_as_failed(environment, monkeypatch):
         record = session.get(AnalysisRecord, UUID(identity))
         assert record.status == "FAILED" and record.error_code == "EXECUTION_INTERRUPTED"
     assert Job.fetch(identity, connection=queue.queue.connection).get_status().value == "failed"
+
+
+def test_workhorse_exit_during_publication_never_exposes_outputs(environment, monkeypatch):
+    from stepwise.s3_storage import S3ArtifactStore
+    from stepwise.storage import ArtifactStore
+
+    client, sessions, queue, engine, settings = environment
+    identity = upload(client).json()["analysis_id"]
+    if settings.storage_backend == "s3":
+        original = S3ArtifactStore._put
+
+        def partial(self, *args):
+            original(self, *args)
+            os._exit(17)
+
+        monkeypatch.setattr(S3ArtifactStore, "_put", partial)
+    else:
+        original = ArtifactStore.publish
+
+        def published(self, *args):
+            original(self, *args)
+            os._exit(17)
+
+        monkeypatch.setattr(ArtifactStore, "publish", published)
+    run_worker(queue.queue.name, queue.queue.connection, engine)
+    with sessions() as session:
+        record = session.get(AnalysisRecord, UUID(identity))
+        assert record.status == "FAILED" and record.error_code == "EXECUTION_INTERRUPTED"
+        assert record.result is None
+        assert not any(a.artifact_type == "generated" for a in record.artifacts)
+    assert client.get(f"/api/v1/analyses/{identity}/artifacts/report.html").status_code == 409
 
 
 def test_missing_redis_job_is_reconciled(environment):

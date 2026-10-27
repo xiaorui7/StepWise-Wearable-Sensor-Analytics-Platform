@@ -1,0 +1,579 @@
+{
+  "generated_at": "2026-10-16T17:06:21.456979+00:00",
+  "synthetic_data": true,
+  "environment": {
+    "client_os": "Windows-11-10.0.26200-SP0",
+    "client_python": "3.13.12",
+    "logical_cpus": 16,
+    "worker_count": 2,
+    "api_replicas": 1,
+    "deployment": "compose",
+    "api_runtime": {
+      "python": "3.12.15",
+      "packages": {
+        "fastapi": "0.143.3",
+        "rq": "2.12.0",
+        "redis": "5.3.1",
+        "sqlalchemy": "2.1.4",
+        "numpy": "2.5.4",
+        "pandas": "2.3.3",
+        "matplotlib": "3.11.2",
+        "boto3": "1.43.114",
+        "botocore": "1.43.114"
+      }
+    }
+  },
+  "fixture_sha256": "4c7eb5c8535ba03868a12f22aa30e37e950839facd6435f78d2d0b36ca82c4cb",
+  "walking_bytes": 134854,
+  "standing_bytes": 70722,
+  "warmup_jobs": 1,
+  "poll_interval_s": 0.2,
+  "method": "Closed-loop clients; completion includes upload, queue wait, processing and polling delay; HTTP rate includes polling/artifact requests over entire scenario",
+  "queue_wait_definition": "For single-attempt jobs only: DB started_at minus created_at; includes input persistence and enqueue overhead, not pure Redis waiting. Retried jobs expose only their last start and are excluded from this distribution.",
+  "scenarios": [
+    {
+      "concurrency": 1,
+      "jobs": 10,
+      "completed": 10,
+      "failure_rate": 0.0,
+      "duplicate_logical_jobs": 0,
+      "measurement_window_s": 13.824015199992573,
+      "http_requests": 132,
+      "http_errors": 0,
+      "http_latency": {
+        "p50_ms": 14.784349987166934,
+        "p95_ms": 94.73843499727079
+      },
+      "extra_attempts": 0,
+      "queue_wait_proxy": {
+        "p50_ms": 490.66150000000005,
+        "p95_ms": 800.4896999999999
+      },
+      "http_requests_per_s": 9.548600612076216,
+      "completed_jobs_per_s": 0.7233788342481982,
+      "submission": {
+        "p50_ms": 101.42965000704862,
+        "p95_ms": 260.17959500168195
+      },
+      "completion_including_queue": {
+        "p50_ms": 1206.55399998941,
+        "p95_ms": 1802.816545005771
+      },
+      "measurements": [
+        {
+          "index": 0,
+          "success": true,
+          "submission_ms": 368.56520001310855,
+          "analysis_id": "ded387fe-3c80-41c1-87ec-b462bb41b7a8",
+          "attempts": 1,
+          "admission_to_last_start_ms": 908.4870000000001,
+          "completion_ms": 1894.1233000077773,
+          "workflow_ms": 2004.7831000119913
+        },
+        {
+          "index": 1,
+          "success": true,
+          "submission_ms": 101.11640000832267,
+          "analysis_id": "1fb29d81-0d13-4f4a-9cde-32c058c1c2b2",
+          "attempts": 1,
+          "admission_to_last_start_ms": 449.602,
+          "completion_ms": 1192.962000000989,
+          "workflow_ms": 1281.9068999961019
+        },
+        {
+          "index": 2,
+          "success": true,
+          "submission_ms": 104.85629999311641,
+          "analysis_id": "79050c3a-b8ad-4b5d-a317-c54d52847251",
+          "attempts": 1,
+          "admission_to_last_start_ms": 476.858,
+          "completion_ms": 1208.903199993074,
+          "workflow_ms": 1306.879299983848
+        },
+        {
+          "index": 3,
+          "success": true,
+          "submission_ms": 93.67969998857006,
+          "analysis_id": "f45440b8-b060-4af6-bd43-5c9a7b30f86a",
+          "attempts": 1,
+          "admission_to_last_start_ms": 458.272,
+          "completion_ms": 988.3368999871891,
+          "workflow_ms": 1078.8375999836717
+        },
+        {
+          "index": 4,
+          "success": true,
+          "submission_ms": 101.74290000577457,
+          "analysis_id": "e99d23c8-4459-4123-954c-8464dbce1214",
+          "attempts": 1,
+          "admission_to_last_start_ms": 504.46500000000003,
+          "completion_ms": 1210.3740999882575,
+          "workflow_ms": 1308.9700000127777
+        },
+        {
+          "index": 5,
+          "success": true,
+          "submission_ms": 91.67509997496381,
+          "analysis_id": "693c5eaf-3feb-4db5-89c7-c70335f31bde",
+          "attempts": 1,
+          "admission_to_last_start_ms": 549.042,
+          "completion_ms": 1196.5441999782342,
+          "workflow_ms": 1296.4137999806553
+        },
+        {
+          "index": 6,
+          "success": true,
+          "submission_ms": 93.43120001722127,
+          "analysis_id": "e123fa29-d68b-46c1-91cf-7f70b3363bd8",
+          "attempts": 1,
+          "admission_to_last_start_ms": 531.378,
+          "completion_ms": 1242.2481999965385,
+          "workflow_ms": 1342.817800003104
+        },
+        {
+          "index": 7,
+          "success": true,
+          "submission_ms": 103.34460000740364,
+          "analysis_id": "597b52c9-5c77-40b4-962d-df999deb6618",
+          "attempts": 1,
+          "admission_to_last_start_ms": 440.955,
+          "completion_ms": 980.1878999860492,
+          "workflow_ms": 1078.2093000016175
+        },
+        {
+          "index": 8,
+          "success": true,
+          "submission_ms": 96.07860000687651,
+          "analysis_id": "6018bb28-65fe-4b34-9e4d-acdbe30c156f",
+          "attempts": 1,
+          "admission_to_last_start_ms": 439.98199999999997,
+          "completion_ms": 1204.204799985746,
+          "workflow_ms": 1312.2726999863517
+        },
+        {
+          "index": 9,
+          "success": true,
+          "submission_ms": 127.7082999877166,
+          "analysis_id": "c0969ae9-e22e-4c35-aeab-a0f757f736ea",
+          "attempts": 1,
+          "admission_to_last_start_ms": 668.493,
+          "completion_ms": 1691.2194000033196,
+          "workflow_ms": 1798.762699996587
+        }
+      ]
+    },
+    {
+      "concurrency": 5,
+      "jobs": 10,
+      "completed": 10,
+      "failure_rate": 0.0,
+      "duplicate_logical_jobs": 0,
+      "measurement_window_s": 12.022703299997374,
+      "http_requests": 199,
+      "http_errors": 0,
+      "http_latency": {
+        "p50_ms": 78.37480001035146,
+        "p95_ms": 341.5640700201038
+      },
+      "extra_attempts": 0,
+      "queue_wait_proxy": {
+        "p50_ms": 2435.822,
+        "p95_ms": 4476.908899999999
+      },
+      "http_requests_per_s": 16.552017881040403,
+      "completed_jobs_per_s": 0.8317596925145931,
+      "submission": {
+        "p50_ms": 878.9783499960322,
+        "p95_ms": 1197.3915399998077
+      },
+      "completion_including_queue": {
+        "p50_ms": 4471.059299990884,
+        "p95_ms": 6435.450610000406
+      },
+      "measurements": [
+        {
+          "index": 0,
+          "success": true,
+          "submission_ms": 1149.5400999847334,
+          "analysis_id": "0a2e88a4-4282-41f5-9674-86f72ff963a8",
+          "attempts": 1,
+          "admission_to_last_start_ms": 655.683,
+          "completion_ms": 2510.629600001266,
+          "workflow_ms": 2701.9264999835286
+        },
+        {
+          "index": 1,
+          "success": true,
+          "submission_ms": 1183.4412000025623,
+          "analysis_id": "2dee9f22-3e26-4e73-9ced-4f3027eae96e",
+          "attempts": 1,
+          "admission_to_last_start_ms": 2097.264,
+          "completion_ms": 4452.193300006911,
+          "workflow_ms": 5156.139900005655
+        },
+        {
+          "index": 2,
+          "success": true,
+          "submission_ms": 1158.0127000052016,
+          "analysis_id": "5ae40f16-b76e-4dd2-ad67-13ae70ffcea3",
+          "attempts": 1,
+          "admission_to_last_start_ms": 617.798,
+          "completion_ms": 2505.484900000738,
+          "workflow_ms": 2764.569599996321
+        },
+        {
+          "index": 3,
+          "success": true,
+          "submission_ms": 1196.2812000128906,
+          "analysis_id": "f94c8f09-0bbe-4f3c-abb7-b085e3b86ee6",
+          "attempts": 1,
+          "admission_to_last_start_ms": 2196.312,
+          "completion_ms": 4774.0269000059925,
+          "workflow_ms": 5457.253700005822
+        },
+        {
+          "index": 4,
+          "success": true,
+          "submission_ms": 1198.2999999891035,
+          "analysis_id": "996666ea-c455-4ee8-bf92-07ee48bd9e61",
+          "attempts": 1,
+          "admission_to_last_start_ms": 4244.293,
+          "completion_ms": 6738.674199994421,
+          "workflow_ms": 7326.456300012069
+        },
+        {
+          "index": 5,
+          "success": true,
+          "submission_ms": 344.977899978403,
+          "analysis_id": "72902647-abb1-415e-b073-983cc10bebb7",
+          "attempts": 1,
+          "admission_to_last_start_ms": 2658.2219999999998,
+          "completion_ms": 4489.925299974857,
+          "workflow_ms": 5313.417999976082
+        },
+        {
+          "index": 6,
+          "success": true,
+          "submission_ms": 341.2743000080809,
+          "analysis_id": "b4079563-1117-4ccd-8572-132511083110",
+          "attempts": 1,
+          "admission_to_last_start_ms": 4667.231,
+          "completion_ms": 6064.844000007724,
+          "workflow_ms": 6541.445500013651
+        },
+        {
+          "index": 7,
+          "success": true,
+          "submission_ms": 407.4502000003122,
+          "analysis_id": "58d4817e-6591-4f78-a1a0-a0c7e0f7c9bb",
+          "attempts": 1,
+          "admission_to_last_start_ms": 2483.5009999999997,
+          "completion_ms": 4228.934599988861,
+          "workflow_ms": 4744.101799995406
+        },
+        {
+          "index": 8,
+          "success": true,
+          "submission_ms": 444.7280000022147,
+          "analysis_id": "d4cd8866-db90-485c-8c67-2c29326d4ce3",
+          "attempts": 1,
+          "admission_to_last_start_ms": 3911.4429999999998,
+          "completion_ms": 5740.177699975902,
+          "workflow_ms": 6274.970200000098
+        },
+        {
+          "index": 9,
+          "success": true,
+          "submission_ms": 608.416600007331,
+          "analysis_id": "3180ce8c-8ef1-48c3-81b5-037dcf6e866e",
+          "attempts": 1,
+          "admission_to_last_start_ms": 2388.143,
+          "completion_ms": 4208.729400008451,
+          "workflow_ms": 4684.263800008921
+        }
+      ]
+    }
+  ],
+  "resource_snapshots": [
+    {
+      "at": "2026-10-16T17:05:58.109970+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "11.62%",
+          "memory": "151.5MiB / 15.34GiB"
+        },
+        {
+          "service": "minio",
+          "cpu_percent": "9.42%",
+          "memory": "146.1MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "3.49%",
+          "memory": "66.02MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "0.97%",
+          "memory": "8.801MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "14.27MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "42.74%",
+          "memory": "207.1MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "97.33%",
+          "memory": "214.5MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-16T17:06:01.791003+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "13.07%",
+          "memory": "156.4MiB / 15.34GiB"
+        },
+        {
+          "service": "minio",
+          "cpu_percent": "7.91%",
+          "memory": "148.4MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "6.34%",
+          "memory": "70.74MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "0.99%",
+          "memory": "8.543MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "14.27MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "26.84%",
+          "memory": "118.4MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "4.13%",
+          "memory": "112.4MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-16T17:06:04.839671+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "6.93%",
+          "memory": "151.2MiB / 15.34GiB"
+        },
+        {
+          "service": "minio",
+          "cpu_percent": "5.47%",
+          "memory": "150.7MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "2.66%",
+          "memory": "65.62MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "0.89%",
+          "memory": "7.797MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "14.27MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "0.10%",
+          "memory": "118.5MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "83.34%",
+          "memory": "215.7MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-16T17:06:08.528870+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "5.98%",
+          "memory": "152MiB / 15.34GiB"
+        },
+        {
+          "service": "minio",
+          "cpu_percent": "3.43%",
+          "memory": "154.6MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "3.14%",
+          "memory": "65.94MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "0.68%",
+          "memory": "7.801MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "14.27MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "82.05%",
+          "memory": "210.8MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "0.00%",
+          "memory": "112.4MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-16T17:06:12.481801+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "38.77%",
+          "memory": "160.5MiB / 15.34GiB"
+        },
+        {
+          "service": "minio",
+          "cpu_percent": "15.75%",
+          "memory": "157.7MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "8.92%",
+          "memory": "73.65MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "1.57%",
+          "memory": "8.336MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "14.27MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "93.13%",
+          "memory": "191.3MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "92.98%",
+          "memory": "175.7MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-16T17:06:16.961239+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "23.04%",
+          "memory": "161.2MiB / 15.34GiB"
+        },
+        {
+          "service": "minio",
+          "cpu_percent": "15.38%",
+          "memory": "183.5MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "21.67%",
+          "memory": "74.77MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "5.76%",
+          "memory": "12.2MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "14.27MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "95.77%",
+          "memory": "202.5MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "93.33%",
+          "memory": "214.8MiB / 15.34GiB"
+        }
+      ]
+    },
+    {
+      "at": "2026-10-16T17:06:21.456227+00:00",
+      "containers": [
+        {
+          "service": "api",
+          "cpu_percent": "22.74%",
+          "memory": "160.8MiB / 15.34GiB"
+        },
+        {
+          "service": "minio",
+          "cpu_percent": "18.51%",
+          "memory": "196.5MiB / 15.34GiB"
+        },
+        {
+          "service": "postgres",
+          "cpu_percent": "13.73%",
+          "memory": "72.6MiB / 15.34GiB"
+        },
+        {
+          "service": "redis",
+          "cpu_percent": "9.93%",
+          "memory": "7.891MiB / 15.34GiB"
+        },
+        {
+          "service": "web",
+          "cpu_percent": "0.00%",
+          "memory": "14.27MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "6.08%",
+          "memory": "118.3MiB / 15.34GiB"
+        },
+        {
+          "service": "worker",
+          "cpu_percent": "94.76%",
+          "memory": "214.9MiB / 15.34GiB"
+        }
+      ]
+    }
+  ]
+}

@@ -47,8 +47,15 @@ same-filesystem directory rename. The DB transaction publishes all artifact meta
 together. The API gates generated artifact access on `SUCCEEDED`, including historical artifacts.
 Inputs are private; their storage keys are not exposed by the public API.
 
+The optional S3 backend replaces staging/rename with conditional immutable object writes and
+SHA-256 content checks. All required objects are verified before the same fenced DB completion
+transaction. Partial object sets remain private and have no generated metadata. Object-store
+timeouts, throttling and selected server/conditional-conflict errors participate in bounded RQ
+retries; checksum failures and permission errors do not. There is no atomic S3 directory rename.
+See [object storage and orphan cleanup](CLOUD_INFRASTRUCTURE.md).
+
 This gives idempotent successful publication and fenced completion, not exactly-once computation.
-It does not provide a distributed transaction between PostgreSQL, Redis and the filesystem.
+It does not provide a distributed transaction between PostgreSQL, Redis and either storage backend.
 
 ## Recovery
 
@@ -83,6 +90,7 @@ added. Historical SUCCEEDED results remain readable even after RQ metadata expir
 | Redis accepted enqueue, response acknowledgement lost | API may return 503. A conditional failure update cannot overwrite an already claimed or completed job. The key prevents duplicate logical jobs; the outcome still needs polling/reconciliation. |
 | DB retry state committed, worker dies before RQ schedules retry | PostgreSQL can temporarily say QUEUED without a live retry. Reconciliation detects the mismatch. |
 | Files renamed, DB commit fails | Final directory can remain orphaned; no generated metadata/result is visible. An attempt uses a new directory on retry. |
+| Some/all S3 objects uploaded, process dies or DB commit fails | Unreferenced objects remain private; a new attempt uses a new token. Cleanup requires DB-reference checks; it is not automatic. |
 | DB commit succeeds, acknowledgement lost | Ownership has already been cleared. The failure handler cannot replace SUCCEEDED with FAILED. |
 | Host/power failure | File flushes and atomic rename are not a backup or cross-system durability guarantee. |
 
@@ -108,3 +116,9 @@ budget, and tests stale-token fencing. `test_submission.py` covers key conflicts
 `test_infrastructure.py` uses isolated PostgreSQL schemas and real Redis/RQ child processes to test
 concurrent submission/claims, two workers, immediate and scheduled retries, terminal failures,
 abrupt child exits, whole-worker termination, and lost queue jobs.
+
+Those real-worker tests run against both local storage and MinIO when configured.
+`test_object_publication.py` covers real object content, partial uploads, revoked ownership,
+unreachable endpoints, failed DB finalization and corrupted downloads. Publication-time process
+death is tested with actual RQ children. `scripts/failure_demo.py` records the separate local kind
+outage and API-replacement experiment.

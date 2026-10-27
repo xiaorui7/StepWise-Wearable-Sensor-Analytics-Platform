@@ -8,14 +8,14 @@ There are eight explicit HTTP operations; generated OpenAPI is available at `/do
 flowchart LR
   Client[React / WeChat] -->|upload + optional key| API[FastAPI]
   API -->|job identity and input metadata| DB[(PostgreSQL)]
-  API -->|atomic input write| Files[Persistent filesystem volume]
+  API -->|store inputs| Files[Local filesystem or optional S3-compatible store]
   API -->|analysis UUID| Queue[(Redis / RQ)]
   Queue --> Worker[RQ worker processes]
   Worker -->|conditional claim and attempts| DB
   Files -->|input| Worker
   Worker --> Core[Parser / calibration / segmentation / features / rules]
   Core --> Reports[HTML / PNG / CSV / JSON]
-  Reports -->|attempt directory rename| Files
+  Reports -->|prepare isolated attempt artifacts| Files
   Worker -->|one completion transaction| DB
   Client -->|poll and retrieve| API
   DB --> API
@@ -31,7 +31,7 @@ flowchart LR
 | `api/main.py`, `api/schemas.py` | Typed requests, size/format validation, submission, polling, history and artifact retrieval |
 | `repository.py`, `db_models.py` | Durable identity, state, attempts, execution ownership and metadata |
 | `jobs.py`, `worker.py` | Redis dispatch, bounded retries, process execution and failure classification |
-| `storage.py` | Safe storage keys, atomic file writes and whole-attempt publication |
+| `storage.py`, `s3_storage.py` | Storage protocol, local atomic rename or private immutable objects with content checks |
 | `recovery.py` | Operator-run reconciliation of lost queue jobs and expired executions |
 
 `analyses` stores status, timestamps, attempts, an execution token, lease expiry, optional hashed
@@ -49,8 +49,9 @@ to the original schema without deleting sessions.
 3. Atomically write the input files, persist their metadata, then enqueue the analysis UUID.
 4. The worker conditionally updates `QUEUED` to `RUNNING`, increments attempts and assigns a UUID
    execution token. Only one concurrent update can win. Analysis runs outside a long DB transaction.
-5. Build all reports in memory. Write a temporary directory inside the persistent volume, then rename
-   it into a token-specific final directory on the same filesystem.
+5. Build all reports in memory. Locally, rename a staged directory into a token-specific final
+   directory. With S3, conditionally write immutable token-specific objects and verify all bytes;
+   no multi-object atomicity or directory rename is assumed.
 6. Lock and verify the execution token. Insert all artifact metadata and set result plus `SUCCEEDED`
    in one PostgreSQL transaction. Artifact access requires `SUCCEEDED`.
 
@@ -66,7 +67,11 @@ Compose starts `api`, `worker`, `postgres`, `redis`, and `web`; an optional `tes
 test runner. Increasing worker count uses `--scale worker=2`. Each worker executes one task in its
 own RQ child process, isolating Matplotlib rendering and CPU work. The default local stack shares
 one filesystem volume between API and workers and runs application containers as a non-root user.
-It assumes one host; there is no cross-host object store or distributed transaction.
+The optional MinIO overlay removes application artifact volumes. The local kind demo runs two API
+pods and two RQ worker pods against shared PostgreSQL/Redis/MinIO services, with a one-off migration
+Job before application startup. Only dependencies have PVCs. This is one local kind node, not
+multi-node high availability. There is no distributed transaction. See
+[CLOUD_INFRASTRUCTURE.md](CLOUD_INFRASTRUCTURE.md) for configuration and failure boundaries.
 
 See [RELIABILITY.md](RELIABILITY.md) for failure windows and [BENCHMARK.md](BENCHMARK.md) for measured
 small-workload behavior.

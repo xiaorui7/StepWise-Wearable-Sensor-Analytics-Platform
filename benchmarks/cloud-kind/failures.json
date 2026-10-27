@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-10-16T17:09:49.727572+00:00",
+  "synthetic_data": true,
+  "context": "kind-stepwise",
+  "namespace": "stepwise",
+  "events": [
+    {
+      "scenario": "object-store unavailable",
+      "upload_http": 503,
+      "download_http": 503,
+      "ready_http": 503,
+      "health_http": 200
+    },
+    {
+      "scenario": "bounded worker attempts after outage",
+      "state": "FAILED",
+      "attempts": 3,
+      "error_code": "ANALYSIS_FAILED",
+      "analysis_id": "f1727fc3-0f5a-4f4b-8341-42e4295a3fd5"
+    },
+    {
+      "scenario": "failed submission key replay",
+      "state": "FAILED",
+      "automatically_resubmitted": false
+    },
+    {
+      "scenario": "new-key submission after storage recovery",
+      "state": "SUCCEEDED"
+    },
+    {
+      "scenario": "API replacement preserves report",
+      "sha256": "0be0618f86facdb378631016785cf51e6b8b24bca567509c078c414bed48f1a9"
+    }
+  ],
+  "outage_wall_s": 22.075738799991086
+}

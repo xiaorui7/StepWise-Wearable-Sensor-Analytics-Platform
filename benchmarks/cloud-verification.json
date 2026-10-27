@@ -1,0 +1,24 @@
+{
+  "test_started_at": "2026-10-19T13:42:36.382530+00:00",
+  "environment": "Linux Docker test runner, Python 3.12.15, PostgreSQL 16, Redis 7, real MinIO",
+  "command": "docker compose -p stepwise-s3 -f docker-compose.yml -f compose.minio.yml --profile s3 --profile test run --rm tests pytest -q --cov=stepwise --cov-branch --cov-report=json:benchmarks/cloud-coverage.json --junitxml=benchmarks/cloud-tests.xml",
+  "tests": 106,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "junit_duration_s": 72.654,
+  "coverage": {
+    "covered_statements": 1172,
+    "statements": 1342,
+    "statement_percent": 87.33233979135619,
+    "covered_branches": 221,
+    "branches": 300,
+    "branch_percent": 73.66666666666667,
+    "combined_percent": 84.83556638246041
+  },
+  "notes": [
+    "Parameterized software tests, not clinical validation.",
+    "Parent-process coverage does not include every forked RQ child line.",
+    "15 warnings: one Starlette TestClient and fourteen RQ test-harness fork deprecations."
+  ]
+}

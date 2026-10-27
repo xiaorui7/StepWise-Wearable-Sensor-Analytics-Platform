@@ -32,3 +32,6 @@ benchmark-results/*
 *.log
 *.tmp
 *.sqlite3
+/.tools/
+/benchmarks/cloud-coverage.json
+/benchmarks/cloud-tests.xml
