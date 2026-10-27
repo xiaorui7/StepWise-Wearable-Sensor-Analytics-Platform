@@ -323,7 +323,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=Path("benchmarks"))
     parser.add_argument("--sample-resources", action="store_true")
     parser.add_argument("--deployment", choices=["compose", "kind"], default="compose")
-    parser.add_argument("--compose-project", default="stepwise_sde_chatgpt_package")
+    parser.add_argument("--compose-project", default="stepwise-bench")
     parser.add_argument("--api-replicas", type=int, default=1, help="Record actual replica count")
     parser.add_argument("--kube-context", default="kind-stepwise")
     parser.add_argument("--kind-node", default="stepwise-control-plane")
