@@ -35,3 +35,5 @@ benchmark-results/*
 /.tools/
 /benchmarks/cloud-coverage.json
 /benchmarks/cloud-tests.xml
+/deploy/aws/.state/
+/aws-verification.json

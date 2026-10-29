@@ -1,0 +1,15 @@
+# Use with the root docker-compose.yml; no custom endpoint or static credentials.
+services:
+  api:
+    environment: &aws-storage
+      STEPWISE_STORAGE_BACKEND: s3
+      STEPWISE_S3_BUCKET: ${AWS_BUCKET:?Set AWS_BUCKET}
+      STEPWISE_S3_REGION: ${AWS_REGION:-us-east-1}
+      STEPWISE_S3_PREFIX: artifacts
+    volumes: !reset []
+    ports: !override ["127.0.0.1:8000:8000"]
+  worker:
+    environment: *aws-storage
+    volumes: !reset []
+  web:
+    ports: !override ["127.0.0.1:5173:80"]

@@ -259,6 +259,12 @@ More context is recorded in [`docs/adr/`](docs/adr/) and the engineering thresho
 The current architecture and consistency limits are described in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 and [`docs/RELIABILITY.md`](docs/RELIABILITY.md).
 
+## AWS (optional)
+
+An optional EC2 + private S3 path runs the same Compose application with instance-role credentials.
+See [AWS deployment](docs/AWS_DEPLOYMENT.md) for setup, synthetic verification, cost estimates and
+teardown. Real AWS execution evidence is pending.
+
 ## Future Improvements
 
 - Add a durable enqueue outbox if automatic recovery of DB/Redis submission gaps becomes necessary.

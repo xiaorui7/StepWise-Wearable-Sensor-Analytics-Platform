@@ -12,3 +12,5 @@ benchmark-results
 example_output
 tests
 miniprogram
+deploy/aws/.state
+aws-verification.json
