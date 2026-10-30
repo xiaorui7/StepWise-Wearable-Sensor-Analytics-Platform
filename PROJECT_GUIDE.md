@@ -60,6 +60,5 @@ are not implemented.
 - [Architecture](docs/ARCHITECTURE.md)
 - [Reliability and recovery](docs/RELIABILITY.md)
 - [Benchmark methodology](docs/BENCHMARK.md)
-- [Backend implementation report](docs/IMPLEMENTATION_REPORT.md)
 - [Object storage and local Kubernetes](docs/CLOUD_INFRASTRUCTURE.md)
 - [Cloud infrastructure verification](docs/CLOUD_EVIDENCE.md)
